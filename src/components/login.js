@@ -2,21 +2,23 @@ import React, { useState } from "react";
 import { StyleSheet, View, Text } from "react-native";
 import { Button, Input } from "react-native-elements";
 import Icon from "react-native-vector-icons/FontAwesome";
+import { doSignInWithEmailAndPassword } from "../firebase/users";
 
 const login = () => {
   const [inputEmail, setInputEmail] = useState("");
   const [inputPassword, setInputPassword] = useState("");
 
-  const submitting = () => {
-    console.log(inputEmail);
-    console.log(inputPassword);
+  const handleSubmit = () => {
+    doSignInWithEmailAndPassword(inputEmail, inputPassword).then(
+      async (user) => {
+        console.log(user);
+      }
+    );
   };
 
   return (
     <View style={styles.container}>
       <View style={styles.innerConatiner}>
-        <Text>{inputEmail}</Text>
-
         <Text style={{ fontSize: 50 }}>Welcome</Text>
         <Input
           placeholder="Email"
@@ -36,7 +38,7 @@ const login = () => {
           title="Login"
           type="outline"
           buttonStyle={{ width: "100%" }}
-          onPress={() => submitting()}
+          onPress={() => handleSubmit()}
         />
       </View>
     </View>

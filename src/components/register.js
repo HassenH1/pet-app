@@ -1,9 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet, View, Text } from "react-native";
 import { Button, Input } from "react-native-elements";
 import Icon from "react-native-vector-icons/FontAwesome";
+import { doCreateUserWithEmailAndPassword } from "../firebase/users";
 
 const Register = () => {
+  const [inputEmail, setInputEmail] = useState("");
+  const [inputName, setInputName] = useState("");
+  const [inputPassword, setInputPassword] = useState("");
+
+  const handleSubmit = () => {
+    doCreateUserWithEmailAndPassword(inputEmail, inputPassword).then(
+      async (user) => {
+        console.log(user, "<----------------register google stuff");
+      }
+    );
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.innerConatiner}>
@@ -11,18 +24,28 @@ const Register = () => {
         <Input
           placeholder="Email"
           leftIcon={<Icon name="envelope" size={24} color="black" />}
+          value={inputEmail}
+          onChangeText={(text) => setInputEmail(text)}
+        />
+        <Input
+          placeholder="Full Name"
+          // leftIcon={<Icon name="account" size={24} color="black" />}
+          value={inputName}
+          onChangeText={(text) => setInputName(text)}
         />
         <Input
           placeholder="Password"
           secureTextEntry={true}
           leftIcon={<Icon name="lock" size={24} color="black" />}
+          value={inputPassword}
+          onChangeText={(text) => setInputPassword(text)}
         />
 
         <Button
           title="Register"
           type="outline"
           buttonStyle={{ width: "100%" }}
-          onPress={() => console.log("Register button has been pressed")}
+          onPress={() => handleSubmit()}
         />
       </View>
     </View>
