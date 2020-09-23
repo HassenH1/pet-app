@@ -45,6 +45,7 @@ function App({ navigation }) {
     <View style={styles.container}>
       <View style={styles.imgContainer}>
         <Image
+          testID="img"
           source={{
             uri:
               "https://www.pngkit.com/png/full/625-6257944_cute-animal-dogsticker-doglove-freetoedit-transparent-dog-kawaii.png",
