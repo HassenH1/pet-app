@@ -1,12 +1,8 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { StyleSheet, Text, View, Button, Image } from "react-native";
-import { useFonts, CuteFont_400Regular } from "@expo-google-fonts/cute-font";
 
 export default function App() {
-  let [fontsLoaded] = useFonts({
-    CuteFont_400Regular,
-  });
   return (
     <View style={styles.container}>
       <View style={styles.imgContainer}>
@@ -22,8 +18,9 @@ export default function App() {
       <View
         style={{
           flex: 1,
-          justifyContent: "space-between",
+          justifyContent: "space-evenly",
           alignItems: "center",
+          width: "100%",
         }}
       >
         <View style={{ borderColor: "orange", borderWidth: 1 }}>
@@ -34,7 +31,7 @@ export default function App() {
           style={{
             borderColor: "purple",
             borderWidth: 1,
-            height: "8rem",
+            height: "10%",
             width: "100%",
           }}
         >
@@ -42,7 +39,7 @@ export default function App() {
             style={{
               flex: 1,
               flexDirection: "column",
-              justifyContent: "space-evenly",
+              justifyContent: "space-between",
               borderColor: "orange",
               borderWidth: 1,
             }}
@@ -83,8 +80,8 @@ const styles = StyleSheet.create({
     zIndex: 1,
   },
   text: {
-    fontFamily: "CuteFont_400Regular",
-    fontSize: "80px",
+    // fontFamily: "CuteFont_400Regular",
+    fontSize: 50,
     color: "#FF4500",
   },
 });
