@@ -5,8 +5,8 @@ import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
 import { Button } from "react-native-elements";
-import Login from "./components/login";
-import Register from "./components/register";
+import Login from "./src/components/login";
+import Register from "./src/components/register";
 
 const Stack = createStackNavigator();
 
