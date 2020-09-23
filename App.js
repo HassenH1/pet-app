@@ -91,6 +91,7 @@ function App({ navigation }) {
             </View>
             <View>
               <Button
+                testID="registerBtn"
                 title="Register"
                 buttonStyle={styles.btn}
                 onPress={() => navigation.navigate("Register")}
