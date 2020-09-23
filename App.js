@@ -1,10 +1,46 @@
 import { StatusBar } from "expo-status-bar";
+import "react-native-gesture-handler";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
 import { Button } from "react-native-elements";
 import Login from "./components/login";
+import Register from "./components/register";
 
-export default function App() {
+const Stack = createStackNavigator();
+
+export default function Main() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="LandingPage">
+        <Stack.Screen
+          name="LandingPage"
+          component={App}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="Login"
+          component={Login}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="Register"
+          component={Register}
+          options={{
+            headerShown: false,
+          }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
+
+function App({ navigation }) {
   return (
     <View style={styles.container}>
       <View style={styles.imgContainer}>
@@ -46,16 +82,14 @@ export default function App() {
               <Button
                 title="Login"
                 buttonStyle={styles.btn}
-                onPress={() => console.log("btn has been pressed 1")}
+                onPress={() => navigation.navigate("Login")}
               />
             </View>
             <View>
               <Button
                 title="Register"
-                // color="#841584"
                 buttonStyle={styles.btn}
-                onPress={() => console.log("btn has been pressed 2")}
-                // type="outline"
+                onPress={() => navigation.navigate("Register")}
               />
             </View>
           </View>
