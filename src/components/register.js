@@ -10,9 +10,51 @@ const Register = () => {
   const [inputPassword, setInputPassword] = useState("");
 
   const handleSubmit = () => {
+    // doCreateUserWithEmailAndPassword(inputEmail, inputPassword).then(
+    //   async (user) => {
+    //     console.log(user, "<----------------register google stuff");
+    //     user
+    //       .updateProfile({
+    //         displayName: inputName,
+    //       })
+    //       .then(
+    //         () => {
+    //           console.log("Registration was successfull");
+    //         },
+    //         (error) => {
+    //           console.log(error, "<----------registration was horrible");
+    //         }
+    //       );
+    //   }
+    // );
+
+    ///////////////////////////////////
     doCreateUserWithEmailAndPassword(inputEmail, inputPassword).then(
-      async (user) => {
-        console.log(user, "<----------------register google stuff");
+      (user) => {
+        user
+          .updateProfile({
+            displayName: inputName,
+          })
+          .then(
+            () => {
+              console.log("Successful");
+            },
+            function (error) {
+              console.log(error, "Something went wrong");
+            }
+          );
+      },
+      (error) => {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // [START_EXCLUDE]
+        if (errorCode == "auth/weak-password") {
+          alert("The password is too weak.");
+        } else {
+          console.error(error);
+        }
+        // [END_EXCLUDE]
       }
     );
   };
