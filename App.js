@@ -1,6 +1,7 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { StyleSheet, Text, View, Button, Image } from "react-native";
+import { StyleSheet, Text, View, Image } from "react-native";
+import { Button } from "react-native-elements";
 
 export default function App() {
   return (
@@ -23,32 +24,39 @@ export default function App() {
           width: "100%",
         }}
       >
-        <View style={{ borderColor: "orange", borderWidth: 1 }}>
+        <View>
           <Text style={styles.text}>Adopt-a-Pet</Text>
         </View>
 
         <View
           style={{
-            borderColor: "purple",
-            borderWidth: 1,
-            height: "10%",
-            width: "100%",
+            height: "15%",
+            width: "98%",
           }}
         >
           <View
             style={{
               flex: 1,
               flexDirection: "column",
-              justifyContent: "space-between",
-              borderColor: "orange",
-              borderWidth: 1,
+              justifyContent: "space-evenly",
             }}
           >
             <View>
-              <Button title="Button 1" />
+              <Button
+                title="Login"
+                buttonStyle={styles.btn}
+                onPress={() => console.log("btn has been pressed 1")}
+                // type="outline"
+              />
             </View>
             <View>
-              <Button title="Button 2" />
+              <Button
+                title="Register"
+                // color="#841584"
+                buttonStyle={styles.btn}
+                onPress={() => console.log("btn has been pressed 2")}
+                // type="outline"
+              />
             </View>
           </View>
         </View>
@@ -64,6 +72,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-evenly",
     alignItems: "center",
     position: "relative",
+    backgroundColor: "whitesmoke",
   },
   imgContainer: {
     width: "73%",
@@ -80,8 +89,10 @@ const styles = StyleSheet.create({
     zIndex: 1,
   },
   text: {
-    // fontFamily: "CuteFont_400Regular",
     fontSize: 50,
     color: "#FF4500",
+  },
+  btn: {
+    marginVertical: 15,
   },
 });
