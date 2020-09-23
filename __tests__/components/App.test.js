@@ -3,6 +3,7 @@ import renderer from "react-test-renderer";
 import { render, fireEvent } from "@testing-library/react-native";
 
 import App from "../../App";
+import Login from "../../src/components/login";
 
 describe("<App/>", () => {
   it("App renders without crashing", () => {
@@ -15,11 +16,21 @@ describe("<App/>", () => {
     expect(tree.children.length).toBe(1);
   });
 
-  it("display the image", () => {
-    const { getByDataTestId, getByTestId } = render(<App />);
-    expect(getByTestId("img")).toHaveAttribute(
-      "source",
-      "https://www.pngkit.com/png/full/625-6257944_cute-animal-dogsticker-doglove-freetoedit-transparent-dog-kawaii.png"
-    );
+  it("should render text", () => {
+    const { getByTestId } = render(<App />);
+    expect(getByTestId("heading")).not.toBeNull();
+  });
+
+  it("Button before firing", () => {
+    const mockFunc = jest.fn();
+    const { getByTestId } = render(<App />);
+    fireEvent.press(getByTestId("loginBtn"));
+    expect(mockFunc).toHaveBeenCalled();
   });
 });
+
+//TODOtesting for image
+// it("display the image", () => {
+//   const { getByTestId } = render(<App />);
+//   expect(getByTestId("img")).toHaveAttribute("source", ""); //.toHaveTextContent("")
+// });

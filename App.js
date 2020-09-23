@@ -63,7 +63,9 @@ function App({ navigation }) {
         }}
       >
         <View>
-          <Text style={styles.text}>Adopt-a-Pet</Text>
+          <Text style={styles.text} testID="heading">
+            Adopt-a-Pet
+          </Text>
         </View>
 
         <View
@@ -81,6 +83,7 @@ function App({ navigation }) {
           >
             <View>
               <Button
+                testID="loginBtn"
                 title="Login"
                 buttonStyle={styles.btn}
                 onPress={() => navigation.navigate("Login")}
