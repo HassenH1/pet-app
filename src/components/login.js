@@ -4,7 +4,7 @@ import { Button, Input } from "react-native-elements";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { doSignInWithEmailAndPassword } from "../firebase/users";
 
-const login = () => {
+const login = ({ navigation }) => {
   const [inputEmail, setInputEmail] = useState("");
   const [inputPassword, setInputPassword] = useState("");
 

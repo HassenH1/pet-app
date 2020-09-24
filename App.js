@@ -7,6 +7,7 @@ import { StyleSheet, Text, View, Image } from "react-native";
 import { Button } from "react-native-elements";
 import Login from "./src/components/login";
 import Register from "./src/components/register";
+import Dashboard from "./src/components/dashboard";
 
 const Stack = createStackNavigator();
 
@@ -31,6 +32,13 @@ export default function Main() {
         <Stack.Screen
           name="Register"
           component={Register}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="Dashboard"
+          component={Dashboard}
           options={{
             headerShown: false,
           }}
