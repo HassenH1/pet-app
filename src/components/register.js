@@ -54,8 +54,9 @@ const Register = ({ navigation }) => {
         }
       );
     } catch (err) {
-      console.log(err, "<-------------final error");
+      throw err;
     }
+    navigation.navigate("Dashboard");
   };
 
   return (
