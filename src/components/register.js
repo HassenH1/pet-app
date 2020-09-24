@@ -8,6 +8,7 @@ const Register = ({ navigation }) => {
   const [inputEmail, setInputEmail] = useState("");
   const [inputName, setInputName] = useState("");
   const [inputPassword, setInputPassword] = useState("");
+  const [error, setError] = useState("");
 
   const handleSubmit = () => {
     try {
@@ -22,7 +23,12 @@ const Register = ({ navigation }) => {
                 console.log("Successful");
               },
               function (error) {
-                console.log(error, "Something went wrong");
+                console.log("something went wrong error<----------------");
+                setError("Something went Wrong.");
+                setTimeout(() => {
+                  setError("");
+                }, 5000);
+                return;
               }
             );
         },
@@ -30,18 +36,25 @@ const Register = ({ navigation }) => {
           // Handle Errors here.
           var errorCode = error.code;
           var errorMessage = error.message;
-          // [START_EXCLUDE]
           if (errorCode == "auth/weak-password") {
-            alert("The password is too weak.");
+            console.log("passwrod is weak error<----------------");
+            setError("The password is too weak.");
+            setTimeout(() => {
+              setError("");
+            }, 5000);
+            return;
           } else {
-            console.error(error);
+            console.log("email is bad error<----------------");
+            setError("The email address is badly formatted.");
+            setTimeout(() => {
+              setError("");
+            }, 5000);
+            return;
           }
-          // [END_EXCLUDE]
         }
       );
-      navigation.navigate("Dashboard");
     } catch (err) {
-      console.log(err);
+      console.log(err, "<-------------final error");
     }
   };
 
@@ -57,7 +70,7 @@ const Register = ({ navigation }) => {
         />
         <Input
           placeholder="Full Name"
-          // leftIcon={<Icon name="account" size={24} color="black" />}
+          leftIcon={<Icon name="user-circle" size={24} color="black" />}
           value={inputName}
           onChangeText={(text) => setInputName(text)}
         />
@@ -75,6 +88,9 @@ const Register = ({ navigation }) => {
           buttonStyle={{ width: "100%" }}
           onPress={() => handleSubmit()}
         />
+      </View>
+      <View>
+        <Text>{error}</Text>
       </View>
     </View>
   );
