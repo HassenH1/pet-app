@@ -9,11 +9,16 @@ const login = ({ navigation }) => {
   const [inputPassword, setInputPassword] = useState("");
 
   const handleSubmit = () => {
-    doSignInWithEmailAndPassword(inputEmail, inputPassword).then(
-      async (user) => {
-        console.log(user);
-      }
-    );
+    try {
+      doSignInWithEmailAndPassword(inputEmail, inputPassword).then(
+        async (user) => {
+          console.log(user);
+        }
+      );
+      navigation.navigate("Dashboard");
+    } catch (e) {
+      console.log(e, " in login handlesubmut function");
+    }
   };
 
   return (
