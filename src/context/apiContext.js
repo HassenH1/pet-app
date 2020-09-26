@@ -23,6 +23,7 @@ export const APIContextProvider = ({ children }) => {
         //filtering data based on adoptation status
         // setApi(data.filter((animal, idx) => animal.status === "adoptable"));
         setApi({
+          //gotta setup data right
           animals: data,
           pagination: data.pagination,
         });

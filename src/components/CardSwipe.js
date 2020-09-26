@@ -2,10 +2,13 @@ import React, { useState } from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
 import Card from "./Card";
 import NoMoreCards from "./NoMoreCards";
+import { apiContextAPI } from "../context/apiContext";
 
 import SwipeCards from "react-native-swipe-cards";
 
 const CardSwipe = () => {
+  const { api } = apiContextAPI();
+
   const [cardTest, setCardTest] = useState([
     { text: "Tomato", backgroundColor: "red" },
     { text: "Aubergine", backgroundColor: "purple" },
@@ -27,17 +30,21 @@ const CardSwipe = () => {
   // If you want a stack of cards instead of one-per-one view, activate stack mode
   // stack={true}
   return (
-    <SwipeCards
-      cards={cardTest}
-      renderCard={(cardData) => <Card {...cardData} />}
-      renderNoMoreCards={() => <NoMoreCards />}
-      handleYup={handleYup}
-      handleNope={handleNope}
-      handleMaybe={handleMaybe}
-      hasMaybeAction={false}
-      // stack={true}
-      yupStyle={styles.yup}
-    />
+    <>
+      {console.log(api, " <------------------------------the api?")}
+
+      <SwipeCards
+        cards={cardTest}
+        renderCard={(cardData) => <Card {...cardData} />}
+        renderNoMoreCards={() => <NoMoreCards />}
+        handleYup={handleYup}
+        handleNope={handleNope}
+        handleMaybe={handleMaybe}
+        hasMaybeAction={false}
+        // stack={true}
+        yupStyle={styles.yup}
+      />
+    </>
   );
 };
 
