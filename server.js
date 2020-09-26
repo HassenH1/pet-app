@@ -17,9 +17,7 @@ let token = "";
 app.use(cors());
 app.use(express.json());
 app.use(methodOverride("_method"));
-// parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
-// parse application/json
 app.use(bodyParser.json());
 
 const getToken = async (url) => {
@@ -36,7 +34,7 @@ const getToken = async (url) => {
       }),
     });
     const json = await response.json();
-    token = json;
+    token = json; //assigned token here
   } catch (error) {
     console.log(error, "<--------------error in getToken method");
   }
@@ -51,6 +49,21 @@ app.get("/", async (req, res) => {
     }
   }
   // TODO: gotta utilize the token here to make requests to the API
+  try {
+    // fetching random animals
+    const response = await fetch(`${url}/animals?sort=random`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token.access_token}`,
+      },
+    });
+    const json = await response.json();
+    console.log(json, "<---------------It works!!!");
+    res.send(json);
+  } catch (error) {
+    console.log(error, "<--------------error in getToken method");
+  }
 });
 
 app.listen(PORT, () => {

@@ -11,13 +11,15 @@ export const APIContextProvider = ({ children }) => {
     // find all the pets that havent been adopted
     async function fetchData() {
       try {
-        const resp = await fetch(url);
+        const resp = await fetch(`${url}/`);
         const data = await resp.json();
         console.log(
           data,
           " <-----------------data response from apiContext useEffect"
         );
-        // setApi(data)
+        //filtering data based on adoptation status
+        // setApi(data.filter((animal, idx) => animal.status === "adoptable"));
+        setApi(data);
       } catch (error) {
         console.log(error, " <--------------useEffect in userContext");
       }
