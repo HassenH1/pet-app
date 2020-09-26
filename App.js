@@ -132,9 +132,9 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
   },
-  textContainer: {
-    zIndex: 1,
-  },
+  // textContainer: {
+  //   zIndex: 1,
+  // },
   text: {
     fontSize: 50,
     color: "#FF4500",
