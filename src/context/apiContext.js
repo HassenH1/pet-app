@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect, createContext } from "react";
+import url from "../ngrok/index";
 
 const APIContext = createContext();
 
@@ -8,6 +9,20 @@ export const APIContextProvider = ({ children }) => {
   useEffect(() => {
     // TODO: Make a fetch call to api here!
     // find all the pets that havent been adopted
+    async function fetchData() {
+      try {
+        const resp = await fetch(url);
+        const data = await resp.json();
+        console.log(
+          data,
+          " <-----------------data response from apiContext useEffect"
+        );
+        // setApi(data)
+      } catch (error) {
+        console.log(error, " <--------------useEffect in userContext");
+      }
+    }
+    fetchData();
   }, []);
 
   return (
