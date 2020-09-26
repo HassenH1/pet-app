@@ -1,12 +1,12 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import Cards from "./card";
+import CardSwipe from "./CardSwipe";
 
 const dashboard = () => {
   return (
     <View style={styles.container}>
       {/* cards go here */}
-      <Cards />
+      <CardSwipe />
       <Text>Dashboard Screen</Text>
       {/* i can have tabs here */}
     </View>
