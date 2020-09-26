@@ -4,7 +4,10 @@ import url from "../ngrok/index";
 const APIContext = createContext();
 
 export const APIContextProvider = ({ children }) => {
-  const [api, setApi] = useState({});
+  const [api, setApi] = useState({
+    animals: [],
+    pagination: {},
+  });
 
   useEffect(() => {
     // TODO: Make a fetch call to api here!
@@ -19,7 +22,10 @@ export const APIContextProvider = ({ children }) => {
         );
         //filtering data based on adoptation status
         // setApi(data.filter((animal, idx) => animal.status === "adoptable"));
-        setApi(data);
+        setApi({
+          animals: data,
+          pagination: data.pagination,
+        });
       } catch (error) {
         console.log(error, " <--------------useEffect in userContext");
       }
