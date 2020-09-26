@@ -34,8 +34,8 @@ const CardSwipe = () => {
       {console.log(api, " <------------------------------the api?")}
 
       <SwipeCards
-        cards={cardTest}
-        renderCard={(cardData) => <Card {...cardData} />}
+        // cards={cardTest}
+        // renderCard={(cardData) => <Card {...cardData} />}
         renderNoMoreCards={() => <NoMoreCards />}
         handleYup={handleYup}
         handleNope={handleNope}
