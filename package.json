@@ -29,6 +29,7 @@
     "expo-status-bar": "~1.0.2",
     "express": "^4.17.1",
     "firebase": "^7.21.0",
+    "method-override": "^3.0.0",
     "node-fetch": "^2.6.1",
     "react": "16.13.1",
     "react-dom": "16.13.1",

@@ -30,7 +30,7 @@ export const UserContextProvider = ({ children }) => {
 };
 
 // export and use this in every component and make life easy
-export function useContextAPI() {
+export function userContextAPI() {
   const context = useContext(UserContext);
   if (context === undefined) {
     throw new Error("Context must be used within a Provider");

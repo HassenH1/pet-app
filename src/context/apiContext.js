@@ -21,8 +21,8 @@ export const APIContextProvider = ({ children }) => {
   );
 };
 
-// export and use this in every component and make life easy
-export function useContextAPI() {
+// just gotta call this custom hook to use useContext hooks in components
+export function apiContextAPI() {
   const context = useContext(APIContext);
   if (context === undefined) {
     throw new Error("Context must be used within a Provider");
