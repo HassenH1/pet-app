@@ -7,12 +7,12 @@ const express = require("express");
 const app = express();
 const fetch = require("node-fetch");
 const PORT = 8000;
-const methodOverride = require("method-override");
-const bodyParser = require("body-parser");
-const cors = require("cors");
-require("dotenv").config();
+const methodOverride = require("method-override"); //Lets you use HTTP verbs such as PUT or DELETE in places where the client doesn't support it.
+const bodyParser = require("body-parser"); //Parse incoming request bodies in a middleware before your handlers, available under the req.body property.
+const cors = require("cors"); //for providing a Connect/Express middleware
+require("dotenv").config(); //loads environment variables from a .env file into process.env
 const url = "https://api.petfinder.com/v2"; //url goes here
-const token = "";
+let token = "";
 
 //middleware
 app.use(cors());
@@ -37,16 +37,25 @@ const getToken = async (url) => {
       }),
     });
     const json = await response.json();
-    console.log(json, "<---------------------------token access here?");
+    token = json;
   } catch (error) {
     console.log(error, "<--------------error in getToken method");
   }
 };
 
-getToken(url);
-
-app.get("/", (req, res) => {
-  res.send("hello world");
+app.get("/", async (req, res) => {
+  if (token === "") {
+    try {
+      await getToken(url);
+      console.log(
+        token,
+        "<+++++++++++++++++++++++++++checking if token var is loaded?"
+      );
+    } catch (e) {
+      console.log(e, " <-----------error inside get method fetching for token");
+    }
+  }
+  res.send("Hello world");
 });
 
 app.listen(PORT, () => {
