@@ -13,6 +13,27 @@ const login = ({ navigation }) => {
       doSignInWithEmailAndPassword(inputEmail, inputPassword).then(
         async (user) => {
           console.log(user);
+        },
+        (error) => {
+          // TODO: Gotta fix this to handle errors correctly
+          // Handle Errors here.
+          console.log(error, "<------------------what is this?");
+          var errorCode = error.code; //this is good i think
+          // if (errorCode == "auth/weak-password") {
+          //   console.log("passwrod is weak error<----------------");
+          //   setError("The password is too weak.");
+          //   setTimeout(() => {
+          //     setError("");
+          //   }, 5000);
+          //   return;
+          // } else {
+          //   console.log("email is bad error<----------------");
+          //   setError("The email address is badly formatted.");
+          //   setTimeout(() => {
+          //     setError("");
+          //   }, 5000);
+          //   return;
+          // }
         }
       );
       navigation.navigate("Dashboard");

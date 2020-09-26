@@ -5,9 +5,7 @@ import CardSwipe from "./CardSwipe";
 const dashboard = () => {
   return (
     <View style={styles.container}>
-      {/* cards go here */}
       <CardSwipe />
-      <Text>Dashboard Screen</Text>
       {/* i can have tabs here */}
     </View>
   );

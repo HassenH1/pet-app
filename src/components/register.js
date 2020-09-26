@@ -31,11 +31,13 @@ const Register = ({ navigation }) => {
                 return;
               }
             );
+          // TODO: Gotta fix this to handle if there is an error then DO NOT route to the next page
         },
         (error) => {
+          // TODO: Same here!
           // Handle Errors here.
           var errorCode = error.code;
-          var errorMessage = error.message;
+          var errorMessage = error.message; //might need this for later
           if (errorCode == "auth/weak-password") {
             console.log("passwrod is weak error<----------------");
             setError("The password is too weak.");
