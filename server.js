@@ -2,7 +2,6 @@
 server is going to be used to fetch data from restful api 
 then store it into context api for global state
 */
-
 const express = require("express");
 const app = express();
 const fetch = require("node-fetch");
@@ -47,15 +46,11 @@ app.get("/", async (req, res) => {
   if (token === "") {
     try {
       await getToken(url);
-      console.log(
-        token,
-        "<+++++++++++++++++++++++++++checking if token var is loaded?"
-      );
     } catch (e) {
       console.log(e, " <-----------error inside get method fetching for token");
     }
   }
-  res.send("Hello world");
+  // TODO: gotta utilize the token here to make requests to the API
 });
 
 app.listen(PORT, () => {
