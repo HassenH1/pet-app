@@ -2,7 +2,6 @@ import React, { useContext, useEffect } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import CardSwipe from "./CardSwipe";
 import { contextAPI } from "../../App";
-import { fetchData } from "../../reducer/fetchData";
 import { url } from "../ngrok/index";
 
 const dashboard = () => {
@@ -10,12 +9,12 @@ const dashboard = () => {
   const { user, loading } = userState;
 
   const fetchData = async () => {
-    console.log("inside the fetchData function");
+    dispatch({ type: "SET_LOADING", payload: true });
     try {
-      console.log("inside the try catch block");
       const resp = await fetch(url);
       const respJson = await resp.json();
-      console.log(respJson, " <------------------data coming in");
+      dispatch({ type: "FETCH_DATA", payload: respJson });
+      dispatch({ type: "SET_LOADING", payload: false });
     } catch (e) {
       console.log(e);
     }
@@ -30,8 +29,7 @@ const dashboard = () => {
     <View style={styles.container}>
       <Text>{user.name}</Text>
       <Text>{user.email}</Text>
-      {/* TODO: gonna work on data API and pass it down along */}
-      {/* <CardSwipe /> */}
+      <CardSwipe />
       {/* i can have tabs here */}
     </View>
   );

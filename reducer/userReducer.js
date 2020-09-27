@@ -6,6 +6,7 @@ export const initialState = {
     dislikes: [],
   },
   loading: true,
+  data: [],
 };
 
 export const reducer = (state = initialState, action) => {
@@ -19,6 +20,12 @@ export const reducer = (state = initialState, action) => {
     return {
       ...state,
       loading: action.payload,
+    };
+  }
+  if (action.type === "FETCH_DATA") {
+    return {
+      ...state,
+      data: action.payload,
     };
   }
   return state;
