@@ -3,10 +3,10 @@ import { StyleSheet, View, Text } from "react-native";
 import { Button, Input } from "react-native-elements";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { doSignInWithEmailAndPassword } from "../firebase/users";
-import { userContext } from "../../App";
+import { contextAPI } from "../../App";
 
 const login = ({ navigation }) => {
-  const { userState, dispatch } = useContext(userContext);
+  const { userState, dispatch } = useContext(contextAPI);
   const { user, loading } = userState;
   const [inputEmail, setInputEmail] = useState("");
   const [inputPassword, setInputPassword] = useState("");
@@ -15,7 +15,6 @@ const login = ({ navigation }) => {
     try {
       doSignInWithEmailAndPassword(inputEmail, inputPassword).then(
         async (user) => {
-          console.log(user.user, " <-----------------------login user?");
           dispatch({
             type: "SET_USER",
             payload: {

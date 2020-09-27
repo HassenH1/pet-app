@@ -8,9 +8,8 @@ export const initialState = {
   loading: true,
 };
 
-export const reducer = (state, action) => {
+export const reducer = (state = initialState, action) => {
   if (action.type === "SET_USER") {
-    console.log(state, "<----------------the state in reducer?");
     return {
       ...state,
       user: action.payload,

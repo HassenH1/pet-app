@@ -3,10 +3,10 @@ import { StyleSheet, View, Text } from "react-native";
 import { Button, Input } from "react-native-elements";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { doCreateUserWithEmailAndPassword } from "../firebase/users";
-import { userContext } from "../../App";
+import { contextAPI } from "../../App";
 
 const Register = ({ navigation }) => {
-  const { userState, dispatch } = useContext(userContext);
+  const { userState, dispatch } = useContext(contextAPI);
   const { user, loading } = userState;
   const [inputEmail, setInputEmail] = useState("");
   const [inputName, setInputName] = useState("");

@@ -8,7 +8,7 @@ import Dashboard from "./src/components/dashboard";
 import LandingPage from "./src/components/LandingPage";
 import { reducer, initialState } from "./reducer/userReducer";
 
-export const userContext = createContext();
+export const contextAPI = createContext();
 
 const Stack = createStackNavigator();
 
@@ -51,10 +51,10 @@ export default () => {
   const [userState, dispatch] = useReducer(reducer, initialState);
 
   return (
-    <userContext.Provider value={{ userState, dispatch }}>
+    <contextAPI.Provider value={{ userState, dispatch }}>
       <NavigationContainer>
         <App />
       </NavigationContainer>
-    </userContext.Provider>
+    </contextAPI.Provider>
   );
 };

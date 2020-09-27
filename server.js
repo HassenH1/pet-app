@@ -41,6 +41,7 @@ const getToken = async (url) => {
 };
 
 app.get("/", async (req, res) => {
+  console.log("hittting the backend");
   if (token === "") {
     try {
       await getToken(url);
