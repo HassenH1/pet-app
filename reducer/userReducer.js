@@ -1,13 +1,24 @@
 export const initialState = {
-  name: "",
-  email: "",
+  user: {
+    name: "",
+    email: "",
+    likes: [],
+    dislikes: [],
+  },
+  loading: true,
 };
 
 export const reducer = (state, action) => {
-  if (action.type === "TEST") {
+  if (action.type === "SET_USER") {
     return {
       ...state,
-      data: "Testing reducer",
+      user: action.payload,
+    };
+  }
+  if (action.type === "SET_LOADING") {
+    return {
+      ...state,
+      loading: action.payload,
     };
   }
   return state;

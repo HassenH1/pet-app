@@ -37,7 +37,7 @@ const CardSwipe = () => {
         handleMaybe={handleMaybe}
         hasMaybeAction={false}
         // stack={true}
-        yupStyle={styles.yup}
+        // yupStyle={styles.yup}
       />
     </>
   );
@@ -45,13 +45,4 @@ const CardSwipe = () => {
 
 export default CardSwipe;
 
-const styles = StyleSheet.create({
-  yup: {
-    borderWidth: 22,
-    borderColor: "orange",
-    position: "absolute",
-    top: 0,
-    right: 0,
-    height: 32,
-  },
-});
+const styles = StyleSheet.create({});
