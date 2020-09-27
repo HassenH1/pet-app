@@ -36,7 +36,7 @@ const CardSwipe = () => {
         handleNope={handleNope}
         handleMaybe={handleMaybe}
         hasMaybeAction={false}
-        stack={true}
+        // stack={true}
         yupStyle={styles.yup}
       />
     </>

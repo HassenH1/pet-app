@@ -1,4 +1,4 @@
-import React from "react";
+import React, { createContext, useReducer } from "react";
 import "react-native-gesture-handler";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -6,6 +6,9 @@ import Login from "./src/components/login";
 import Register from "./src/components/register";
 import Dashboard from "./src/components/dashboard";
 import LandingPage from "./src/components/LandingPage";
+import { reducer, initialState } from "./reducer/userReducer";
+
+export const userContext = createContext();
 
 const Stack = createStackNavigator();
 
@@ -45,9 +48,13 @@ function App() {
 }
 
 export default () => {
+  const [userState, dispatch] = useReducer(reducer, initialState);
+
   return (
-    <NavigationContainer>
-      <App />
-    </NavigationContainer>
+    <userContext.Provider value={{ userState, dispatch }}>
+      <NavigationContainer>
+        <App />
+      </NavigationContainer>
+    </userContext.Provider>
   );
 };
