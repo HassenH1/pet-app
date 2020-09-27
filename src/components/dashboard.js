@@ -13,7 +13,7 @@ const dashboard = () => {
     console.log("inside the fetchData function");
     try {
       console.log("inside the try catch block");
-      const resp = await fetch(`${url}`);
+      const resp = await fetch(url);
       const respJson = await resp.json();
       console.log(respJson, " <------------------data coming in");
     } catch (e) {
