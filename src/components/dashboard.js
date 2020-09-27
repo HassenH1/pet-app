@@ -1,11 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import CardSwipe from "./CardSwipe";
+import { userContext } from "../../App";
 
 const dashboard = () => {
+  const { userState, dispatch } = useContext(userContext);
+  const { user, loading } = userState;
+
   return (
     <View style={styles.container}>
-      <CardSwipe />
+      <Text>{user.name}</Text>
+      <Text>{user.email}</Text>
+      {/* <CardSwipe /> */}
       {/* i can have tabs here */}
     </View>
   );

@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { StyleSheet, View, Text } from "react-native";
 import { Button, Input } from "react-native-elements";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { doCreateUserWithEmailAndPassword } from "../firebase/users";
+import { userContext } from "../../App";
 
 const Register = ({ navigation }) => {
+  const { userState, dispatch } = useContext(userContext);
+  const { user, loading } = userState;
   const [inputEmail, setInputEmail] = useState("");
   const [inputName, setInputName] = useState("");
   const [inputPassword, setInputPassword] = useState("");
@@ -53,10 +56,20 @@ const Register = ({ navigation }) => {
             }, 5000);
             return;
           }
-        }
+        },
+        dispatch({
+          type: "SET_USER",
+          payload: {
+            name: user.user.displayName,
+            email: user.user.email,
+            likes: [],
+            dislikes: [],
+          },
+        }),
+        dispatch({ type: "SET_LOADING", payload: false })
       );
     } catch (err) {
-      throw err;
+      throw `${err} in register component`;
     }
     navigation.navigate("Dashboard");
   };

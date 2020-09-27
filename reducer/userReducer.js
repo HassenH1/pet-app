@@ -10,6 +10,7 @@ export const initialState = {
 
 export const reducer = (state, action) => {
   if (action.type === "SET_USER") {
+    console.log(state, "<----------------the state in reducer?");
     return {
       ...state,
       user: action.payload,
