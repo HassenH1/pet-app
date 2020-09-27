@@ -92,9 +92,6 @@ const Register = ({ navigation }) => {
           onPress={() => handleSubmit()}
         />
       </View>
-      <View>
-        <Text>{error}</Text>
-      </View>
     </View>
   );
 };

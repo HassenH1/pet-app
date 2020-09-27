@@ -2,13 +2,10 @@ import React, { useState } from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
 import Card from "./Card";
 import NoMoreCards from "./NoMoreCards";
-import { apiContextAPI } from "../context/apiContext";
 
 import SwipeCards from "react-native-swipe-cards";
 
 const CardSwipe = () => {
-  const { api } = apiContextAPI();
-
   const [cardTest, setCardTest] = useState([
     { text: "Tomato", backgroundColor: "red" },
     { text: "Aubergine", backgroundColor: "purple" },
@@ -31,17 +28,15 @@ const CardSwipe = () => {
   // stack={true}
   return (
     <>
-      {console.log(api, " <------------------------------the api?")}
-
       <SwipeCards
-        // cards={cardTest}
-        // renderCard={(cardData) => <Card {...cardData} />}
+        cards={cardTest}
+        renderCard={(cardData) => <Card {...cardData} />}
         renderNoMoreCards={() => <NoMoreCards />}
         handleYup={handleYup}
         handleNope={handleNope}
         handleMaybe={handleMaybe}
         hasMaybeAction={false}
-        // stack={true}
+        stack={true}
         yupStyle={styles.yup}
       />
     </>

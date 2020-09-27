@@ -1,18 +1,12 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import CardSwipe from "./CardSwipe";
-import { userContextAPI } from "../context/userContext";
 
 const dashboard = () => {
-  const { state } = userContextAPI();
   return (
     <View style={styles.container}>
       <CardSwipe />
       {/* i can have tabs here */}
-      <View>
-        <Text>{state.user.name}</Text>
-        <Text>{state.user.email}</Text>
-      </View>
     </View>
   );
 };

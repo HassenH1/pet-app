@@ -3,10 +3,8 @@ import { StyleSheet, View, Text } from "react-native";
 import { Button, Input } from "react-native-elements";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { doSignInWithEmailAndPassword } from "../firebase/users";
-import { userContextAPI } from "../context/userContext";
 
 const login = ({ navigation }) => {
-  const { seState } = userContextAPI();
   const [inputEmail, setInputEmail] = useState("");
   const [inputPassword, setInputPassword] = useState("");
 
@@ -15,7 +13,6 @@ const login = ({ navigation }) => {
       doSignInWithEmailAndPassword(inputEmail, inputPassword).then(
         async (user) => {
           console.log(user, " <-----------------------login user?");
-          // setState(user)
         },
         (error) => {
           // TODO: Gotta fix this to handle errors correctly
