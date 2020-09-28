@@ -10,10 +10,11 @@ const dashboard = () => {
 
   const fetchData = async () => {
     dispatch({ type: "SET_LOADING", payload: true });
-    console.log("inside fetchData function");
     try {
-      console.log("inside the beginning of try catch block");
-      console.log(url, " <--------------the url i am using?");
+      console.log(
+        url,
+        " <-------------------------------------the url i am using?"
+      );
       const resp = await fetch(url);
       const respJson = await resp.json();
       dispatch({ type: "FETCH_DATA", payload: respJson });

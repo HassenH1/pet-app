@@ -2,10 +2,15 @@ import React, { useState } from "react";
 import { StyleSheet } from "react-native";
 import Card from "./Card";
 import NoMoreCards from "./NoMoreCards";
-
+import { useAPI } from "../../context/apiContext";
 import SwipeCards from "react-native-swipe-cards";
 
 const CardSwipe = () => {
+  const { userState, dispatch } = useAPI();
+  const { user, loading, data } = userState;
+
+  console.log(data, " <----------------------from cardSwipe.js");
+
   const [cardTest, setCardTest] = useState([
     { text: "Tomato", backgroundColor: "red" },
     { text: "Aubergine", backgroundColor: "purple" },
