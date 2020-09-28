@@ -3,12 +3,14 @@ import { StyleSheet, View, Text } from "react-native";
 import { Button, Input } from "react-native-elements";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { doSignInWithEmailAndPassword } from "../firebase/users";
-import { contextAPI } from "../../App";
+// import { contextAPI } from "../../App";
+import { useAPI } from "../../context/apiContext";
 import { useNavigation } from "@react-navigation/native";
 
 const login = () => {
   const navigation = useNavigation();
-  const { userState, dispatch } = useContext(contextAPI);
+  // const { userState, dispatch } = useContext(contextAPI);
+  const { userState, dispatch } = useAPI();
   const { user, loading } = userState;
   const [inputEmail, setInputEmail] = useState("");
   const [inputPassword, setInputPassword] = useState("");
@@ -52,7 +54,7 @@ const login = () => {
       );
       navigation.navigate("Dashboard");
     } catch (e) {
-      console.log(e, " in login handlesubmut function");
+      console.log(e, " in login handlesubmit function");
     }
   };
 

@@ -6,55 +6,58 @@ import Login from "./src/components/login";
 import Register from "./src/components/register";
 import Dashboard from "./src/components/dashboard";
 import LandingPage from "./src/components/LandingPage";
-import { reducer, initialState } from "./reducer/userReducer";
+import { APIContextProvider } from "./context/apiContext";
+// import { reducer, initialState } from "./reducer/userReducer";
 
-export const contextAPI = createContext();
+// export const contextAPI = createContext();
 
 const Stack = createStackNavigator();
 
 function App() {
   return (
-    <Stack.Navigator initialRouteName="LandingPage">
-      <Stack.Screen
-        name="LandingPage"
-        component={LandingPage}
-        options={{
-          headerShown: false,
-        }}
-      />
-      <Stack.Screen
-        name="Login"
-        component={Login}
-        options={{
-          headerShown: false,
-        }}
-      />
-      <Stack.Screen
-        name="Register"
-        component={Register}
-        options={{
-          headerShown: false,
-        }}
-      />
-      <Stack.Screen
-        name="Dashboard"
-        component={Dashboard}
-        options={{
-          headerShown: false,
-        }}
-      />
-    </Stack.Navigator>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="LandingPage">
+        <Stack.Screen
+          name="LandingPage"
+          component={LandingPage}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="Login"
+          component={Login}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="Register"
+          component={Register}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="Dashboard"
+          component={Dashboard}
+          options={{
+            headerShown: false,
+          }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
 export default () => {
-  const [userState, dispatch] = useReducer(reducer, initialState);
+  // const [userState, dispatch] = useReducer(reducer, initialState);
 
   return (
-    <contextAPI.Provider value={{ userState, dispatch }}>
-      <NavigationContainer>
-        <App />
-      </NavigationContainer>
-    </contextAPI.Provider>
+    // <contextAPI.Provider value={{ userState, dispatch }}>
+    <APIContextProvider>
+      <App />
+    </APIContextProvider>
+    // </contextAPI.Provider>
   );
 };
