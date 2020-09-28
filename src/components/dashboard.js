@@ -1,12 +1,10 @@
 import React, { useContext, useEffect } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import CardSwipe from "./CardSwipe";
-// import { contextAPI } from "../../App";
 import { useAPI } from "../../context/apiContext";
 import { url } from "../ngrok/index";
 
 const dashboard = () => {
-  // const { userState, dispatch } = useContext(contextAPI);
   const { userState, dispatch } = useAPI();
   const { user, loading } = userState;
 
@@ -31,7 +29,7 @@ const dashboard = () => {
     <View style={styles.container}>
       <Text>{user.name}</Text>
       <Text>{user.email}</Text>
-      {/* <CardSwipe /> */}
+      <CardSwipe />
       {/* i can have tabs here */}
     </View>
   );

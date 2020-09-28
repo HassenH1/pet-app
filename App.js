@@ -7,9 +7,6 @@ import Register from "./src/components/register";
 import Dashboard from "./src/components/dashboard";
 import LandingPage from "./src/components/LandingPage";
 import { APIContextProvider } from "./context/apiContext";
-// import { reducer, initialState } from "./reducer/userReducer";
-
-// export const contextAPI = createContext();
 
 const Stack = createStackNavigator();
 
@@ -51,13 +48,9 @@ function App() {
 }
 
 export default () => {
-  // const [userState, dispatch] = useReducer(reducer, initialState);
-
   return (
-    // <contextAPI.Provider value={{ userState, dispatch }}>
     <APIContextProvider>
       <App />
     </APIContextProvider>
-    // </contextAPI.Provider>
   );
 };

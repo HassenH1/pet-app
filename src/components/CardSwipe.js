@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, Image } from "react-native";
-import { Card } from "./Card";
-import { NoMoreCards } from "./NoMoreCards";
+import { StyleSheet } from "react-native";
+import Card from "./Card";
+import NoMoreCards from "./NoMoreCards";
 
-import { SwipeCards } from "react-native-swipe-cards";
+import SwipeCards from "react-native-swipe-cards";
 
 const CardSwipe = () => {
   const [cardTest, setCardTest] = useState([
