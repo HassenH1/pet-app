@@ -2,8 +2,11 @@ import React from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
 import { Button } from "react-native-elements";
 import { StatusBar } from "expo-status-bar";
+import { useNavigation } from "@react-navigation/native";
 
-export default function LandingPage({ navigation }) {
+export default function LandingPage() {
+  const navigation = useNavigation();
+
   return (
     <View style={styles.container}>
       <View style={styles.imgContainer}>

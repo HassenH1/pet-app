@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
-import Card from "./Card";
-import NoMoreCards from "./NoMoreCards";
+// import { Card } from "./Card";
+// import { NoMoreCards } from "./NoMoreCards";
 
-import SwipeCards from "react-native-swipe-cards";
-
+// import { SwipeCards } from "react-native-swipe-cards";
+/*
 const CardSwipe = () => {
   const [cardTest, setCardTest] = useState([
     { text: "Tomato", backgroundColor: "red" },
@@ -46,3 +46,4 @@ const CardSwipe = () => {
 export default CardSwipe;
 
 const styles = StyleSheet.create({});
+*/

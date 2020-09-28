@@ -4,8 +4,10 @@ import { Button, Input } from "react-native-elements";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { doSignInWithEmailAndPassword } from "../firebase/users";
 import { contextAPI } from "../../App";
+import { useNavigation } from "@react-navigation/native";
 
-const login = ({ navigation }) => {
+const login = () => {
+  const navigation = useNavigation();
   const { userState, dispatch } = useContext(contextAPI);
   const { user, loading } = userState;
   const [inputEmail, setInputEmail] = useState("");
