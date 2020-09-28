@@ -13,7 +13,7 @@ const Stack = createStackNavigator();
 function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="LandingPage">
+      <Stack.Navigator initialRouteName="Dashboard">
         <Stack.Screen
           name="LandingPage"
           component={LandingPage}

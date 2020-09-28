@@ -5,7 +5,7 @@ then store it into context api for global state
 const express = require("express");
 const app = express();
 const fetch = require("node-fetch");
-const PORT = 8000;
+const PORT = 8080;
 const methodOverride = require("method-override"); //Lets you use HTTP verbs such as PUT or DELETE in places where the client doesn't support it.
 const bodyParser = require("body-parser"); //Parse incoming request bodies in a middleware before your handlers, available under the req.body property.
 const cors = require("cors"); //for providing a Connect/Express middleware
