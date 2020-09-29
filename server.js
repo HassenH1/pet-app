@@ -49,7 +49,6 @@ app.get("/", async (req, res) => {
       console.log(e, " <-----------error inside get method fetching for token");
     }
   }
-  // TODO: gotta utilize the token here to make requests to the API
   try {
     // fetching random animals
     const response = await fetch(`${url}/animals?sort=random`, {
@@ -60,8 +59,11 @@ app.get("/", async (req, res) => {
       },
     });
     const json = await response.json();
-    console.log(json, "<---------------It works!!!");
-    res.send(json);
+    // console.log(
+    //   { animals: json.animals, page: json.pagination },
+    //   "<---------------It works!!!"
+    // );
+    res.send({ animals: json.animals, page: json.pagination });
   } catch (error) {
     console.log(error, "<--------------error in getToken method");
   }

@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
 
 const Card = (props) => {
+  console.log(props, " <-------------------props in card.js");
   return (
     <View style={[styles.card, { backgroundColor: props.backgroundColor }]}>
-      <Text>{props.text}</Text>
+      <Text>{props.name}</Text>
     </View>
   );
 };

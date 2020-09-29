@@ -6,7 +6,10 @@ export const initialState = {
     dislikes: [],
   },
   loading: true,
-  data: [],
+  data: {
+    animals: [],
+    page: "",
+  },
 };
 
 export const reducer = (state = initialState, action) => {
@@ -25,7 +28,10 @@ export const reducer = (state = initialState, action) => {
   if (action.type === "FETCH_DATA") {
     return {
       ...state,
-      data: action.payload,
+      data: {
+        animals: action.payload.animals,
+        page: action.payload.page,
+      },
     };
   }
   return state;
