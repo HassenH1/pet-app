@@ -11,46 +11,6 @@ const CardSwipe = () => {
   const { user, loading, data } = userState;
   const [cardTest, setCardTest] = useState();
 
-  // const fetchData = async () => {
-  //   dispatch({ type: "SET_LOADING", payload: true });
-  //   try {
-  //     const resp = await fetch(url);
-  //     const respJson = await resp.json();
-  //     dispatch({ type: "FETCH_DATA", payload: respJson });
-  //     dispatch({ type: "SET_LOADING", payload: false });
-  //     setCardTest(
-  //       data.animals.filter((animal) => animal.status === "adoptable")
-  //     );
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
-  // };
-
-  // const fetchData = async () => {
-  //   try {
-  //     let res = await fetch(url);
-  //     res = await res.json();
-  //     setCardTest(
-  //       data.animals.filter((animal) => animal.status === "adoptable")
-  //     );
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   fetchData();
-  // }, []);
-
-  // const [cardTest, setCardTest] = useState([
-  //   { text: "Tomato", backgroundColor: "red" },
-  //   { text: "Aubergine", backgroundColor: "purple" },
-  //   { text: "Courgette", backgroundColor: "green" },
-  //   { text: "Blueberry", backgroundColor: "blue" },
-  //   { text: "Umm...", backgroundColor: "cyan" },
-  //   { text: "orange", backgroundColor: "orange" },
-  // ]);
-
   function handleYup(card) {
     console.log(`Yup for ${card.name}`);
   }
@@ -64,10 +24,6 @@ const CardSwipe = () => {
   // stack={true}
   return (
     <>
-      {console.log(
-        data.animals,
-        " <---------------------------------------data??"
-      )}
       <SwipeCards
         cards={data.animals}
         renderCard={(cardData) => <Card {...cardData} />}
