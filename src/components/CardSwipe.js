@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { StyleSheet } from "react-native";
 import Card from "./Card";
 import NoMoreCards from "./NoMoreCards";
-import { useAPI } from "../../context/apiContext";
 import SwipeCards from "react-native-swipe-cards";
+import { useAPI } from "../../context/apiContext";
 import { url } from "../ngrok/index";
 
 const CardSwipe = () => {
@@ -26,21 +26,21 @@ const CardSwipe = () => {
   //   }
   // };
 
-  const fetchData = async () => {
-    try {
-      let res = await fetch(url);
-      res = await res.json();
-      setCardTest(
-        data.animals.filter((animal) => animal.status === "adoptable")
-      );
-    } catch (e) {
-      console.log(e);
-    }
-  };
+  // const fetchData = async () => {
+  //   try {
+  //     let res = await fetch(url);
+  //     res = await res.json();
+  //     setCardTest(
+  //       data.animals.filter((animal) => animal.status === "adoptable")
+  //     );
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // };
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+  // useEffect(() => {
+  //   fetchData();
+  // }, []);
 
   // const [cardTest, setCardTest] = useState([
   //   { text: "Tomato", backgroundColor: "red" },
@@ -64,8 +64,12 @@ const CardSwipe = () => {
   // stack={true}
   return (
     <>
+      {console.log(
+        data.animals,
+        " <---------------------------------------data??"
+      )}
       <SwipeCards
-        cards={cardTest}
+        cards={data.animals}
         renderCard={(cardData) => <Card {...cardData} />}
         renderNoMoreCards={() => <NoMoreCards />}
         handleYup={handleYup}
