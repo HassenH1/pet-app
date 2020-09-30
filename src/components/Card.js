@@ -16,18 +16,16 @@ const Card = (props) => {
               height: "90%",
               width: "100%",
               justifyContent: "space-between",
-              borderColor: "yellow",
-              borderWidth: 3,
+              // borderColor: "yellow",
+              // borderWidth: 3,
             }}
           >
             <Image
               style={{
-                // flex: ,
                 width: "100%",
                 // height: auto,
                 aspectRatio: 1, // <-- this
                 resizeMode: "contain",
-                // aspectRatio: image.width / image.height,
               }}
               source={{ uri: props?.photos[0]?.full }}
               resizeMode={"contain"}
@@ -35,8 +33,8 @@ const Card = (props) => {
           </View>
           <View
             style={{
-              borderColor: "orange",
-              borderWidth: 1,
+              // borderColor: "orange",
+              // borderWidth: 1,
               width: "100%",
               height: "10%",
             }}
@@ -57,7 +55,17 @@ const styles = StyleSheet.create({
     alignItems: "center",
     width: windowWidth - 10,
     height: 600,
-    borderColor: "red",
-    borderWidth: 1,
+    borderColor: "#E8E8E8",
+    borderWidth: 1.8,
+    backgroundColor: "#E8E8E8",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+
+    elevation: 5,
   },
 });
