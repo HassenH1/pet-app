@@ -7,7 +7,7 @@ import Register from "./src/components/register";
 import Dashboard from "./src/components/dashboard";
 import LandingPage from "./src/components/LandingPage";
 import { APIContextProvider, useAPI } from "./context/apiContext";
-import AsyncStorage from "@react-native-community/async-storage";
+import { keepUserLoggedIn } from "./src/firebase/users";
 
 const Stack = createStackNavigator();
 
@@ -16,16 +16,7 @@ function App() {
   const { user, loading, data } = userState;
 
   useEffect(() => {
-    const bootstrapAsync = async () => {
-      let userToken;
-
-      try {
-        userToken = await AsyncStorage.getItem("userToken");
-      } catch (e) {
-        console.log(`${e} <----- in App Component`);
-      }
-      dispatch({ type: "RESTORE_TOKEN", token: userToken });
-    };
+    const bootstrapAsync = async () => {};
 
     bootstrapAsync();
   }, []);
