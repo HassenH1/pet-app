@@ -5,6 +5,9 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import { doSignInWithEmailAndPassword } from "../firebase/users";
 import { useAPI } from "../../context/apiContext";
 import { useNavigation } from "@react-navigation/native";
+import AsyncStorage from "@react-native-community/async-storage";
+
+//TODO: gotta use async storage to put the person who signed up there
 
 const login = () => {
   const navigation = useNavigation();

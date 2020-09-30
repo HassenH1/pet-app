@@ -6,7 +6,7 @@ const windowHeight = Dimensions.get("window").height;
 
 const Card = (props) => {
   return (
-    <View style={[styles.card, { backgroundColor: props.backgroundColor }]}>
+    <View style={[styles.card /*{ backgroundColor: props.backgroundColor }*/]}>
       {!props?.photos[0]?.full ? (
         <Text>No Photo is Available</Text>
       ) : (
@@ -65,7 +65,6 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
-
     elevation: 5,
   },
 });
