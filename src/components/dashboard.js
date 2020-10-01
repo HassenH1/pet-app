@@ -4,7 +4,7 @@ import CardSwipe from "./CardSwipe";
 import { useAPI } from "../../context/apiContext";
 import { url } from "../ngrok/index";
 
-const dashboard = () => {
+const Dashboard = () => {
   const { userState, dispatch } = useAPI();
   const { user, loading, data } = userState;
 
@@ -32,7 +32,7 @@ const dashboard = () => {
   );
 };
 
-export default dashboard;
+export default Dashboard;
 
 const styles = StyleSheet.create({
   container: {

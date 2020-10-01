@@ -6,6 +6,7 @@ import Login from "./src/components/login";
 import Register from "./src/components/register";
 import Dashboard from "./src/components/dashboard";
 import LandingPage from "./src/components/LandingPage";
+import Account from "./src/components/Account";
 import { APIContextProvider, useAPI } from "./context/apiContext";
 import { auth } from "./src/firebase/users";
 
@@ -69,6 +70,13 @@ function App() {
             <Stack.Screen
               name="Dashboard"
               component={Dashboard}
+              options={{
+                headerShown: false,
+              }}
+            />
+            <Stack.Screen
+              name="Account"
+              component={Account}
               options={{
                 headerShown: false,
               }}
