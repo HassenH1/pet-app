@@ -39,7 +39,6 @@ function App() {
 
   return (
     <NavigationContainer>
-      {/* <Stack.Navigator initialRouteName="Dashboard"> */}
       <Stack.Navigator>
         {user.name === "" ? (
           <>

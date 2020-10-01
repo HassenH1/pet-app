@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet } from "react-native";
+import { ActivityIndicator, StyleSheet } from "react-native";
 import Card from "./Card";
 import NoMoreCards from "./NoMoreCards";
 import SwipeCards from "react-native-swipe-cards";
 import { useAPI } from "../../context/apiContext";
-import { url } from "../ngrok/index";
 
 const CardSwipe = () => {
   const { userState, dispatch } = useAPI();
@@ -24,17 +23,21 @@ const CardSwipe = () => {
   // stack={true}
   return (
     <>
-      <SwipeCards
-        cards={data.animals}
-        renderCard={(cardData) => <Card {...cardData} />}
-        renderNoMoreCards={() => <NoMoreCards />}
-        handleYup={handleYup}
-        handleNope={handleNope}
-        handleMaybe={handleMaybe}
-        hasMaybeAction={false}
-        // stack={true}
-        // yupStyle={styles.yup}
-      />
+      {loading ? (
+        <ActivityIndicator size="large" color="#00ff00" />
+      ) : (
+        <SwipeCards
+          cards={data.animals}
+          renderCard={(cardData) => <Card {...cardData} />}
+          renderNoMoreCards={() => <NoMoreCards />}
+          handleYup={handleYup}
+          handleNope={handleNope}
+          handleMaybe={handleMaybe}
+          hasMaybeAction={false}
+          // stack={true}
+          // yupStyle={styles.yup}
+        />
+      )}
     </>
   );
 };
