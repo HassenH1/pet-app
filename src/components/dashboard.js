@@ -6,7 +6,7 @@ import { url } from "../ngrok/index";
 
 const Dashboard = () => {
   const { userState, dispatch } = useAPI();
-  const { user, loading, data } = userState;
+  const { user, loading, data, location } = userState;
 
   const fetchData = async () => {
     dispatch({ type: "SET_LOADING", payload: true });
@@ -21,13 +21,13 @@ const Dashboard = () => {
   };
 
   useEffect(() => {
-    fetchData();
+    // fetchData();
   }, []);
 
   return (
     <View style={styles.container}>
-      <CardSwipe />
-      {/* i can have tabs here */}
+      {/* we are going to show location here */}
+      {/* <CardSwipe /> */}
     </View>
   );
 };

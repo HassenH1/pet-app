@@ -4,6 +4,7 @@ export const initialState = {
     email: "",
     likes: [],
     dislikes: [],
+    location: {},
   },
   loading: true,
   data: {
@@ -17,6 +18,17 @@ export const reducer = (state = initialState, action) => {
     return {
       ...state,
       user: action.payload,
+    };
+  }
+  if (action.type === "SET_USER_LOCATION") {
+    return {
+      ...state,
+      user: {
+        location: {
+          lat: action.payload.lat,
+          lon: action.payload.lon,
+        },
+      },
     };
   }
   if (action.type === "SET_LOADING") {
