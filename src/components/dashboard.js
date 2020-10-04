@@ -32,12 +32,13 @@ const Dashboard = () => {
       dispatch({ type: "SET_LOADING", payload: true });
       let { status } = await Location.requestPermissionsAsync();
       if (status !== "granted") {
-        setErrorMsg("Permission to access location was denied");
+        // setErrorMsg("Permission to access location was denied");
+        console.log(
+          "Permission is needed to keep going <----from dashboard component"
+        );
       }
 
       let location = await Location.getCurrentPositionAsync({});
-      // setLocation(location); // after grabbing user location...
-      // console.log(location, "<--------------location");
       dispatch({
         type: "SET_USER_LOCATION",
         payload: location,
@@ -49,16 +50,8 @@ const Dashboard = () => {
     // fetchData();
   }, []);
 
-  // let text = "Waiting..";
-  // if (errorMsg) {
-  //   text = errorMsg;
-  // } else if (loc) {
-  //   text = JSON.stringify(loc);
-  // }
-
   return (
     <View style={styles.container}>
-      {/* we are going to show location here */}
       {/* <CardSwipe /> */}
       {loading ? (
         <ActivityIndicator size="large" color="#00ff00" />
