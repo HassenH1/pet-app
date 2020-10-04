@@ -27,7 +27,7 @@ const CardSwipe = () => {
         <ActivityIndicator size="large" color="#00ff00" />
       ) : (
         <SwipeCards
-          cards={data.animals}
+          cards={data.animals.filter((animal) => animal.status === "adoptable")}
           renderCard={(cardData) => <Card {...cardData} />}
           renderNoMoreCards={() => <NoMoreCards />}
           handleYup={handleYup}
