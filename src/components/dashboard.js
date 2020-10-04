@@ -24,7 +24,7 @@ const Dashboard = () => {
   };
 
   useEffect(() => {
-    (async () => {
+    (async (callback) => {
       let { status } = await Location.requestPermissionsAsync();
       if (status !== "granted") {
         setErrorMsg("Permission to access location was denied");
@@ -32,8 +32,11 @@ const Dashboard = () => {
 
       let location = await Location.getCurrentPositionAsync({});
       console.log(location);
-      setLocation(location);
-    })();
+      setLocation(location); // after grabbing user location...
+
+      callback(); // ...fetch the data
+    })(fetchData);
+
     // fetchData();
   }, []);
 
