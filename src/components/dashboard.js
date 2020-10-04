@@ -51,11 +51,11 @@ const Dashboard = () => {
   return (
     <View style={styles.container}>
       {loading ? (
-        <ActivityIndicator size="large" color="#00ff00" />
+        <>
+          <ActivityIndicator size="large" color="#00ff00" />
+          <Text>Finding User Location...</Text>
+        </>
       ) : (
-        // <Text>
-        //   {user.location.lat} and {user.location.lon}
-        // </Text>
         <CardSwipe />
       )}
     </View>
