@@ -16,7 +16,7 @@ const Dashboard = () => {
   const { user, loading, data } = userState;
 
   const fetchData = async () => {
-    // dispatch({ type: "SET_LOADING", payload: true });
+    // dispatch({ type: "SET_LOADING", payload: true }); //delete this later
     try {
       const resp = await fetch(url);
       const respJson = await resp.json();
@@ -43,22 +43,20 @@ const Dashboard = () => {
         type: "SET_USER_LOCATION",
         payload: location,
       });
-      dispatch({ type: "SET_LOADING", payload: false });
+      dispatch({ type: "SET_LOADING", payload: false }); // delete this later
       await callback(); // ...fetch the data
     })(fetchData);
-
-    // fetchData();
   }, []);
 
   return (
     <View style={styles.container}>
-      {/* <CardSwipe /> */}
       {loading ? (
         <ActivityIndicator size="large" color="#00ff00" />
       ) : (
-        <Text>
-          {user.location.lat} and {user.location.lon}
-        </Text>
+        // <Text>
+        //   {user.location.lat} and {user.location.lon}
+        // </Text>
+        <CardSwipe />
       )}
     </View>
   );
