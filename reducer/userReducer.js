@@ -25,8 +25,8 @@ export const reducer = (state = initialState, action) => {
       ...state,
       user: {
         location: {
-          lat: action.payload.lat,
-          lon: action.payload.lon,
+          lat: action.payload.coords.latitude,
+          lon: action.payload.coords.longitude,
         },
       },
     };
