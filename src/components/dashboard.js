@@ -31,15 +31,24 @@ const Dashboard = () => {
       }
 
       let location = await Location.getCurrentPositionAsync({});
+      console.log(location);
       setLocation(location);
     })();
     // fetchData();
   }, []);
 
+  let text = "Waiting..";
+  if (errorMsg) {
+    text = errorMsg;
+  } else if (loc) {
+    text = JSON.stringify(loc);
+  }
+
   return (
     <View style={styles.container}>
       {/* we are going to show location here */}
       {/* <CardSwipe /> */}
+      <Text>{text}</Text>
     </View>
   );
 };
