@@ -16,7 +16,6 @@ const Dashboard = () => {
   const { user, loading, data } = userState;
 
   const fetchData = async () => {
-    // dispatch({ type: "SET_LOADING", payload: true }); //delete this later
     try {
       const resp = await fetch(url);
       const respJson = await resp.json();
@@ -43,7 +42,6 @@ const Dashboard = () => {
         type: "SET_USER_LOCATION",
         payload: location,
       });
-      dispatch({ type: "SET_LOADING", payload: false }); // delete this later
       await callback(); // ...fetch the data
     })(fetchData);
   }, []);
