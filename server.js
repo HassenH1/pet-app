@@ -59,13 +59,28 @@ app.get("/", async (req, res) => {
       },
     });
     const json = await response.json();
-    // console.log(
-    //   { animals: json.animals, page: json.pagination },
-    //   "<---------------It works!!!"
-    // );
     res.send({ animals: json.animals, page: json.pagination });
   } catch (error) {
     console.log(error, "<--------------error in getToken method");
+  }
+});
+
+app.post("/location", async (req, res) => {
+  console.log("hitting the post location route");
+  console.log(req.body, "<-----------the body is?");
+  const { lat, lon } = req.body;
+  try {
+    const resp = await fetch(`${url}/animals?location=${lat}, ${lon}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token.access_token}`,
+      },
+    });
+    resp = await resp.json();
+    res.send(resp);
+  } catch (e) {
+    console.log(`error in post location route ${e}`);
   }
 });
 
