@@ -4,13 +4,13 @@ export const initialState = {
     email: "",
     likes: [],
     dislikes: [],
-    location: {},
   },
   loading: true,
   data: {
     animals: [],
     page: "",
   },
+  location: {},
 };
 
 export const reducer = (state = initialState, action) => {
@@ -23,11 +23,9 @@ export const reducer = (state = initialState, action) => {
   if (action.type === "SET_USER_LOCATION") {
     return {
       ...state,
-      user: {
-        location: {
-          lat: action.payload.coords.latitude,
-          lon: action.payload.coords.longitude,
-        },
+      location: {
+        lat: action.payload.coords.latitude,
+        lon: action.payload.coords.longitude,
       },
     };
   }

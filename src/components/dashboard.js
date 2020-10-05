@@ -13,11 +13,24 @@ import * as Location from "expo-location";
 
 const Dashboard = () => {
   const { userState, dispatch } = useAPI();
-  const { user, loading, data } = userState;
+  const { user, loading, data, location } = userState;
 
   const fetchData = async () => {
+    console.log(
+      user,
+      "<-----------------what does the user have here? Dashboard Component"
+    );
     try {
-      const resp = await fetch(`${url}/location`);
+      const resp = await fetch(`${url}/location`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          lat: location.lat,
+          lon: location.lon,
+        }),
+      });
       const respJson = await resp.json();
       dispatch({ type: "FETCH_DATA", payload: respJson });
       dispatch({ type: "SET_LOADING", payload: false });
@@ -36,12 +49,13 @@ const Dashboard = () => {
           "Permission is needed to keep going <----from dashboard component"
         );
       }
-
+      console.log("getting ready to set the location of user");
       let location = await Location.getCurrentPositionAsync({});
       dispatch({
         type: "SET_USER_LOCATION",
         payload: location,
       });
+      console.log("location should be set now??");
       await callback(); // ...fetch the data
     })(fetchData);
   }, []);

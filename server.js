@@ -56,7 +56,8 @@ app.post("/location", async (req, res) => {
       },
     });
     resp = await resp.json();
-    res.send(resp);
+    console.log(resp, " <--------------------the response I am sending back");
+    // res.send(resp);
   } catch (e) {
     console.log(`error in post location route ${e}`);
   }
