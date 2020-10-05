@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import {
   StyleSheet,
   Text,
@@ -17,7 +17,7 @@ const Dashboard = () => {
 
   const fetchData = async () => {
     try {
-      const resp = await fetch(url);
+      const resp = await fetch(`${url}/location`);
       const respJson = await resp.json();
       dispatch({ type: "FETCH_DATA", payload: respJson });
       dispatch({ type: "SET_LOADING", payload: false });
