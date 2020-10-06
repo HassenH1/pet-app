@@ -23,10 +23,12 @@ export const reducer = (state = initialState, action) => {
   if (action.type === "SET_USER_LOCATION") {
     return {
       ...state,
-      location: {
-        lat: action.payload.coords.latitude,
-        lon: action.payload.coords.longitude,
-      },
+      location: action.payload,
+      //{
+      // lat: action.payload.coords.latitude,
+      // lon: action.payload.coords.longitude,
+
+      //},
     };
   }
   if (action.type === "SET_LOADING") {

@@ -16,11 +16,11 @@ app.use(cors());
 app.use(methodOverride("_method"));
 
 //testing post route
-app.post("/", (req, res) => {
-  console.log("test post method");
-  console.log(req.body);
-  res.send(`Hello world ${req.body}`);
-});
+// app.post("/", (req, res) => {
+//   console.log("test post method");
+//   console.log(req.body);
+//   res.send(`Hello world ${req.body}`);
+// });
 
 const getToken = async (url) => {
   try {
@@ -44,6 +44,7 @@ const getToken = async (url) => {
 
 app.post("/location", async (req, res) => {
   console.log(req.body, "<-----------what is the body in post request?");
+  res.send({});
   // const { lat, lon } = req.body;
 
   // if (token === "") {

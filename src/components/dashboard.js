@@ -19,10 +19,8 @@ const Dashboard = () => {
     try {
       const resp = await fetch(`${url}/location`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(location),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ location }),
       });
       const respJson = await resp.json();
       dispatch({ type: "FETCH_DATA", payload: respJson });
@@ -43,11 +41,11 @@ const Dashboard = () => {
     }
     console.log("getting ready to set the location of user");
     let location = await Location.getCurrentPositionAsync({});
-    dispatch({
+    await dispatch({
       type: "SET_USER_LOCATION",
       payload: location,
     });
-    fetchData();
+    await fetchData();
   };
 
   useEffect(() => {
@@ -82,7 +80,10 @@ const Dashboard = () => {
           <Text>Finding User Location...</Text>
         </>
       ) : (
-        <CardSwipe />
+        // <CardSwipe />
+        <Text>
+          Found user location: {location.lat}, {location.lon}
+        </Text>
       )}
     </View>
   );
