@@ -24,11 +24,6 @@ export const reducer = (state = initialState, action) => {
     return {
       ...state,
       location: action.payload,
-      //{
-      // lat: action.payload.coords.latitude,
-      // lon: action.payload.coords.longitude,
-
-      //},
     };
   }
   if (action.type === "SET_LOADING") {

@@ -4,11 +4,29 @@ import Card from "./Card";
 import NoMoreCards from "./NoMoreCards";
 import SwipeCards from "react-native-swipe-cards";
 import { useAPI } from "../../context/apiContext";
+import { url } from "../ngrok/index";
 
 const CardSwipe = () => {
   const { userState, dispatch } = useAPI();
-  const { user, loading, data } = userState;
-  const [cardTest, setCardTest] = useState();
+  const { user, loading, data, location } = userState;
+
+  useEffect(() => {
+    (async () => {
+      dispatch({ type: "SET_LOADING", payload: true });
+      try {
+        const resp = await fetch(`${url}/location`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(location),
+        });
+        const respJson = await resp.json();
+        dispatch({ type: "FETCH_DATA", payload: respJson });
+        dispatch({ type: "SET_LOADING", payload: false });
+      } catch (e) {
+        console.log(e);
+      }
+    })();
+  }, []);
 
   function handleYup(card) {
     console.log(`Yup for ${card.name}`);
@@ -19,15 +37,19 @@ const CardSwipe = () => {
   function handleMaybe(card) {
     console.log(`Maybe for ${card.name}`);
   }
-  // If you want a stack of cards instead of one-per-one view, activate stack mode
-  // stack={true}
+
   return (
     <>
       {loading ? (
-        <ActivityIndicator size="large" color="#00ff00" />
+        <>
+          <ActivityIndicator size="large" color="#00ff00" />
+          <Text>Loading Cards...</Text>
+        </>
       ) : (
         <SwipeCards
-          cards={data.animals.filter((animal) => animal.status === "adoptable")}
+          cards={data?.animals?.filter(
+            (animal) => animal.status === "adoptable"
+          )}
           renderCard={(cardData) => <Card {...cardData} />}
           renderNoMoreCards={() => <NoMoreCards />}
           handleYup={handleYup}
