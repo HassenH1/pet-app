@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -14,13 +14,14 @@ import * as Location from "expo-location";
 const Dashboard = () => {
   const { userState, dispatch } = useAPI();
   const { user, loading, data, location } = userState;
+  const [userLocation, setuserLocation] = useState({});
 
   const fetchData = async () => {
     try {
       const resp = await fetch(`${url}/location`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ location }),
+        body: JSON.stringify(userLocation),
       });
       const respJson = await resp.json();
       dispatch({ type: "FETCH_DATA", payload: respJson });
@@ -30,45 +31,44 @@ const Dashboard = () => {
     }
   };
 
-  const settingLocation = async () => {
-    dispatch({ type: "SET_LOADING", payload: true });
+  // const settingLocation = async () => {
+  //   dispatch({ type: "SET_LOADING", payload: true });
 
-    let { status } = await Location.requestPermissionsAsync();
-    if (status !== "granted") {
-      console.log(
-        "Permission is needed to keep going <----from dashboard component"
-      );
-    }
-    console.log("getting ready to set the location of user");
-    let location = await Location.getCurrentPositionAsync({});
-    await dispatch({
-      type: "SET_USER_LOCATION",
-      payload: location,
-    });
-    await fetchData();
-  };
+  //   let { status } = await Location.requestPermissionsAsync();
+  //   if (status !== "granted") {
+  //     console.log(
+  //       "Permission is needed to keep going <----from dashboard component"
+  //     );
+  //   }
+  //   let location = await Location.getCurrentPositionAsync({});
+  //   // dispatch({
+  //   //   type: "SET_USER_LOCATION",
+  //   //   payload: location,
+  //   // });
+  //   await setuserLocation(location);
+  //   await fetchData();
+  // };
 
   useEffect(() => {
-    // (async (callback) => {
-    //   dispatch({ type: "SET_LOADING", payload: true });
-    //   let { status } = await Location.requestPermissionsAsync();
-    //   if (status !== "granted") {
-    //     // setErrorMsg("Permission to access location was denied");
-    //     console.log(
-    //       "Permission is needed to keep going <----from dashboard component"
-    //     );
-    //   }
-    //   console.log("getting ready to set the location of user");
-    //   let location = await Location.getCurrentPositionAsync({});
-    //   dispatch({
-    //     type: "SET_USER_LOCATION",
-    //     payload: location,
-    //   });
-    //   console.log("location should be set now??");
-    //   await callback(); // ...fetch the data
-    // })(fetchData);
-
-    settingLocation();
+    (async (callback) => {
+      dispatch({ type: "SET_LOADING", payload: true });
+      let { status } = await Location.requestPermissionsAsync();
+      if (status !== "granted") {
+        // setErrorMsg("Permission to access location was denied");
+        console.log(
+          "Permission is needed to keep going <----from dashboard component"
+        );
+      }
+      console.log("getting ready to set the location of user");
+      let location = await Location.getCurrentPositionAsync({});
+      // dispatch({
+      //   type: "SET_USER_LOCATION",
+      //   payload: location,
+      // });
+      setuserLocation((state) => location);
+      console.log("location should be set now??");
+      await callback(); // ...fetch the data
+    })(fetchData);
   }, []);
 
   return (
