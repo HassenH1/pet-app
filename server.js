@@ -12,8 +12,15 @@ let token = "";
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
-app.use(express.json());
+// app.use(express.json());
 app.use(methodOverride("_method"));
+
+//testing post route
+app.post("/", (req, res) => {
+  console.log("test post method");
+  console.log(req.body);
+  res.send(`Hello world ${req.body}`);
+});
 
 const getToken = async (url) => {
   try {
