@@ -45,7 +45,7 @@ const getToken = async (url) => {
 app.post("/location", async (req, res) => {
   console.log(req.body, "<-----------what is the body in post request?");
   // res.send({});
-  const { latitude, longitude } = req.body.coords;
+  const { lat, lon } = req.body;
 
   if (token === "") {
     try {
@@ -57,16 +57,13 @@ app.post("/location", async (req, res) => {
 
   try {
     // https://api.petfinder.com/v2/animals?location=los angeles, california
-    let resp = await fetch(
-      `${url}/animals?location=${latitude}, ${longitude}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token.access_token}`,
-        },
-      }
-    );
+    let resp = await fetch(`${url}/animals?location=${lat}, ${lon}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token.access_token}`,
+      },
+    });
     resp = await resp.json();
     console.log(resp, " <--------------------the response I am sending back");
     res.send({ animals: resp.animals, page: resp.pagination });

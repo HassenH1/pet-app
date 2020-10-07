@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import {
   StyleSheet,
   Text,
@@ -14,24 +14,23 @@ const Dashboard = () => {
   const { userState, dispatch } = useAPI();
   const { loading } = userState;
 
+  const getLocation = async () => {
+    dispatch({ type: "SET_LOADING", payload: true });
+    let { status } = await Location.requestPermissionsAsync();
+    if (status !== "granted") {
+      console.log(
+        "Permission is needed to keep going <----from dashboard component"
+      );
+    }
+    let location = await Location.getCurrentPositionAsync({});
+    dispatch({
+      type: "SET_USER_LOCATION",
+      payload: location,
+    });
+    dispatch({ type: "SET_LOADING", payload: false });
+  };
+
   useEffect(() => {
-    const getLocation = async () => {
-      dispatch({ type: "SET_LOADING", payload: true });
-      let { status } = await Location.requestPermissionsAsync();
-      if (status !== "granted") {
-        console.log(
-          "Permission is needed to keep going <----from dashboard component"
-        );
-      }
-      console.log("getting ready to set the location of user");
-      let location = await Location.getCurrentPositionAsync({});
-      dispatch({
-        type: "SET_USER_LOCATION",
-        payload: location,
-      });
-      console.log("location should be set now??");
-      dispatch({ type: "SET_LOADING", payload: false });
-    };
     getLocation();
   }, []);
 
@@ -58,8 +57,5 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "whitesmoke",
     color: "black",
-  },
-  test: {
-    fontSize: 60,
   },
 });
