@@ -8,7 +8,6 @@ import {
 } from "react-native";
 import CardSwipe from "./CardSwipe";
 import { useAPI } from "../../context/apiContext";
-import { url } from "../ngrok/index";
 import * as Location from "expo-location";
 
 const Dashboard = () => {
@@ -16,7 +15,7 @@ const Dashboard = () => {
   const { loading } = userState;
 
   useEffect(() => {
-    (async () => {
+    const getLocation = async () => {
       dispatch({ type: "SET_LOADING", payload: true });
       let { status } = await Location.requestPermissionsAsync();
       if (status !== "granted") {
@@ -32,7 +31,8 @@ const Dashboard = () => {
       });
       console.log("location should be set now??");
       dispatch({ type: "SET_LOADING", payload: false });
-    })();
+    };
+    getLocation();
   }, []);
 
   return (

@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { ActivityIndicator, StyleSheet } from "react-native";
-import Card from "./Card";
-import NoMoreCards from "./NoMoreCards";
-import SwipeCards from "react-native-swipe-cards";
 import { useAPI } from "../../context/apiContext";
 import { url } from "../ngrok/index";
 
@@ -11,7 +8,7 @@ const CardSwipe = () => {
   const { user, loading, data, location } = userState;
 
   useEffect(() => {
-    (async () => {
+    const fetchData = async () => {
       dispatch({ type: "SET_LOADING", payload: true });
       try {
         const resp = await fetch(`${url}/location`, {
@@ -25,40 +22,21 @@ const CardSwipe = () => {
       } catch (e) {
         console.log(e);
       }
-    })();
+    };
+    fetchData();
   }, []);
-
-  function handleYup(card) {
-    console.log(`Yup for ${card.name}`);
-  }
-  function handleNope(card) {
-    console.log(`Nope for ${card.name}`);
-  }
-  function handleMaybe(card) {
-    console.log(`Maybe for ${card.name}`);
-  }
 
   return (
     <>
       {loading ? (
         <>
           <ActivityIndicator size="large" color="#00ff00" />
-          <Text>Loading Cards...</Text>
+          <Text>Now Loading Cards...</Text>
         </>
       ) : (
-        <SwipeCards
-          cards={data?.animals?.filter(
-            (animal) => animal.status === "adoptable"
-          )}
-          renderCard={(cardData) => <Card {...cardData} />}
-          renderNoMoreCards={() => <NoMoreCards />}
-          handleYup={handleYup}
-          handleNope={handleNope}
-          handleMaybe={handleMaybe}
-          hasMaybeAction={false}
-          // stack={true}
-          // yupStyle={styles.yup}
-        />
+        <>
+          <Text>Hello world</Text>
+        </>
       )}
     </>
   );
