@@ -29,28 +29,32 @@ const CardSwipe = () => {
   }, []);
 
   const showingPhotos = (card) => {
-    if (card?.photos[0].full) {
+    if (card?.photos[0]?.full) {
+      console.log("inside 0");
       return (
         <Image
           source={{ uri: card?.photos[0]?.full }}
           style={styles.cardImage}
         />
       );
-    } else if (card?.photos[1].full) {
+    } else if (card?.photos[1]?.full) {
+      console.log("inside 1");
       return (
         <Image
           source={{ uri: card?.photos[1]?.full }}
           style={styles.cardImage}
         />
       );
-    } else if (card?.photos[2].full) {
+    } else if (card?.photos[2]?.full) {
+      console.log("inside 2");
       return (
         <Image
-          source={{ uri: card?.photos[0]?.full }}
+          source={{ uri: card?.photos[2]?.full }}
           style={styles.cardImage}
         />
       );
     } else {
+      console.log("inside none");
       return <Text>No Cover Photo Available</Text>;
     }
   };
@@ -63,78 +67,71 @@ const CardSwipe = () => {
           <Text>Now Loading Cards...</Text>
         </>
       ) : (
-        <Swiper
-          //put data.animals here vv
-          cards={data.animals}
-          renderCard={(card) => {
-            return (
-              <View style={styles.card}>
-                {/* {card?.photos[0]?.full ? (
-                  <>
-                    <Image
-                      source={{ uri: card?.photos[0]?.full }}
-                      style={styles.cardImage}
-                    />
-                  </>
-                ) : <Text>No Cover Photo Available</Text>
-                }  */}
-                {showingPhotos}
-              </View>
-            );
-          }}
-          onSwiped={(cardIndex) => {
-            console.log(cardIndex);
-            setIndex(index + 1);
-          }}
-          onSwipedAll={() => {
-            console.log("onSwipedAll");
-          }}
-          cardIndex={0}
-          backgroundColor={"whitesmoke"}
-          stackSize={4}
-          stackScale={10}
-          stackSeparation={14}
-          disableBottomSwipe
-          disableTopSwipe
-          animateOverlayLabelsOpacity
-          animateCardOpacity
-          overlayLabels={{
-            left: {
-              title: "Nope",
-              style: {
-                label: {
-                  backgroundColor: "red",
-                  color: "white",
-                  fontSize: 24,
-                },
-                wrapper: {
-                  flexDirection: "column",
-                  alignItems: "flex-end",
-                  justifyContent: "flex-start",
-                  marginTop: 20,
-                  marginLeft: -20,
+        <>
+          <Swiper
+            cards={data.animals}
+            renderCard={(card) => {
+              return (
+                <View style={styles.card}>
+                  {console.log(card, "<-------------------every card?")}
+                  {showingPhotos(card)}
+                </View>
+              );
+            }}
+            onSwiped={(cardIndex) => {
+              console.log(cardIndex);
+              setIndex(index + 1);
+            }}
+            onSwipedAll={() => {
+              console.log("onSwipedAll");
+            }}
+            cardIndex={0}
+            backgroundColor={"whitesmoke"}
+            stackSize={4}
+            stackScale={10}
+            stackSeparation={14}
+            disableBottomSwipe
+            disableTopSwipe
+            animateOverlayLabelsOpacity
+            animateCardOpacity
+            overlayLabels={{
+              left: {
+                title: "Nope",
+                style: {
+                  label: {
+                    backgroundColor: "red",
+                    color: "white",
+                    fontSize: 24,
+                  },
+                  wrapper: {
+                    flexDirection: "column",
+                    alignItems: "flex-end",
+                    justifyContent: "flex-start",
+                    marginTop: 20,
+                    marginLeft: -20,
+                  },
                 },
               },
-            },
-            right: {
-              title: "Like",
-              style: {
-                label: {
-                  backgroundColor: "green",
-                  color: "white",
-                  fontSize: 24,
-                },
-                wrapper: {
-                  flexDirection: "column",
-                  alignItems: "flex-start",
-                  justifyContent: "flex-start",
-                  marginTop: 20,
-                  marginLeft: 20,
+              right: {
+                title: "Like",
+                style: {
+                  label: {
+                    backgroundColor: "green",
+                    color: "white",
+                    fontSize: 24,
+                  },
+                  wrapper: {
+                    flexDirection: "column",
+                    alignItems: "flex-start",
+                    justifyContent: "flex-start",
+                    marginTop: 20,
+                    marginLeft: 20,
+                  },
                 },
               },
-            },
-          }}
-        ></Swiper>
+            }}
+          ></Swiper>
+        </>
       )}
     </>
   );
