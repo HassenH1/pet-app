@@ -6,7 +6,7 @@ const methodOverride = require("method-override");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 require("dotenv").config();
-const url = "https://api.petfinder.com/v2";
+const url = "https://api.petfinder.com";
 let token = "";
 
 app.use(bodyParser.json());
@@ -55,7 +55,7 @@ app.post("/location", async (req, res) => {
   }
 
   try {
-    let resp = await fetch(`${url}/animals?location=${lat}, ${lon}`, {
+    let resp = await fetch(`${url}/v2/animals?location=${lat}, ${lon}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -67,6 +67,17 @@ app.post("/location", async (req, res) => {
   } catch (e) {
     console.log(`error in post location route ${e}`);
   }
+});
+
+app.post("/next", async (req, res) => {
+  const { link } = req.body;
+  console.log(`${url}${link} <==================the url with the new link`);
+
+  // try{
+  //   let resp = await fetch(`${url}${link}`)
+  // }catch(e){
+  //   console.log(e)
+  // }
 });
 
 app.listen(PORT, () => {

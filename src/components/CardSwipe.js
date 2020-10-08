@@ -83,17 +83,28 @@ const CardSwipe = () => {
           <Swiper
             cards={data.animals}
             renderCard={(card) => {
-              return (
-                <View style={styles.card}>
-                  {/* {console.log(card, "<-------------------every card?")} */}
-                  {showingPhotos(card)}
-                </View>
-              );
+              return <View style={styles.card}>{showingPhotos(card)}</View>;
             }}
-            onSwiped={(cardIndex) => {
+            onSwiped={async (cardIndex) => {
               console.log(cardIndex);
               setIndex(index + 1);
               //if cardIndex is at > 20 then load next page
+              if (index > 20) {
+                dispatch({ type: "SET_LOADING", payload: true });
+                try {
+                  const resp = await fetch(`${url}/next`, {
+                    method: "POST",
+                    headers: {
+                      "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(data.page),
+                  });
+                } catch (e) {
+                  console.log(`Error trying to go to next page`);
+                }
+
+                dispatch({ type: "SET_LOADING", payload: false });
+              }
             }}
             onSwipedAll={() => {
               console.log("onSwipedAll");
