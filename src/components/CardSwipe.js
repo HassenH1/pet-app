@@ -29,45 +29,40 @@ const CardSwipe = () => {
   }, []);
 
   const showingPhotos = (card) => {
+    console.log(card, "<=----------what is card?");
     //TODO : check the length of api here
-    //while (card.length <= 20) {
-    if (!card) {
-      return (
-        <>
-          <ActivityIndicator size="large" color="#00ff00" />
-          <Text>Now Loading Images...</Text>
-        </>
-      );
-    } else {
-      if (card?.photos[0]?.full) {
-        console.log("inside 0");
-        return (
-          <Image
-            source={{ uri: card?.photos[0]?.full }}
-            style={styles.cardImage}
-          />
-        );
-      } else if (card?.photos[1]?.full) {
-        console.log("inside 1");
-        return (
-          <Image
-            source={{ uri: card?.photos[1]?.full }}
-            style={styles.cardImage}
-          />
-        );
-        // } else if (card?.photos[2]?.full) {
-        //   console.log("inside 2");
-        //   return (
-        //     <Image
-        //       source={{ uri: card?.photos[2]?.full }}
-        //       style={styles.cardImage}
-        //     />
-        //   );
-      } else {
-        console.log("inside none");
-        return <Text>No Cover Photo Available</Text>;
-      }
-    }
+    // if (!card) {
+    //   return (
+    //     <>
+    //       <ActivityIndicator size="large" color="#00ff00" />
+    //       <Text>Now Loading Images...</Text>
+    //     </>
+    //   );
+    // } else {
+
+    // if (card?.photos[0]?.full) {
+    //   console.log("inside 0");
+    //   return (
+    //     <Image
+    //       source={{ uri: card?.photos[0]?.full }}
+    //       style={styles.cardImage}
+    //     />
+    //   );
+
+    // } else if (card?.photos[1]?.full) {
+    //   console.log("inside 1");
+    //   return (
+    //     <Image
+    //       source={{ uri: card?.photos[1]?.full }}
+    //       style={styles.cardImage}
+    //     />
+    //   );
+
+    // } else {
+    //   console.log("inside none");
+    //   return <Text>No Cover Photo Available</Text>;
+    // }
+
     //}
   };
 
@@ -89,22 +84,23 @@ const CardSwipe = () => {
               console.log(cardIndex);
               setIndex(index + 1);
               //if cardIndex is at > 20 then load next page
-              if (index > 20) {
-                dispatch({ type: "SET_LOADING", payload: true });
-                try {
-                  const resp = await fetch(`${url}/next`, {
-                    method: "POST",
-                    headers: {
-                      "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify(data.page),
-                  });
-                } catch (e) {
-                  console.log(`Error trying to go to next page`);
-                }
+              // if (index > 20) {
+              //   dispatch({ type: "SET_LOADING", payload: true });
+              //   try {
+              //     const resp = await fetch(`${url}/next`, {
+              //       method: "POST",
+              //       headers: {
+              //         "Content-Type": "application/json",
+              //       },
+              //       body: JSON.stringify(data.page),
+              //     });
+              //     const respJson = await resp.json();
+              //   } catch (e) {
+              //     console.log(`Error trying to go to next page`);
+              //   }
 
-                dispatch({ type: "SET_LOADING", payload: false });
-              }
+              //   dispatch({ type: "SET_LOADING", payload: false });
+              // }
             }}
             onSwipedAll={() => {
               console.log("onSwipedAll");

@@ -49,6 +49,9 @@ app.post("/location", async (req, res) => {
   if (token === "") {
     try {
       await getToken(url);
+      if (token.message === "Forbidden") {
+        throw Error;
+      }
     } catch (e) {
       console.log(e, " <-----------error inside get method fetching for token");
     }
@@ -63,15 +66,17 @@ app.post("/location", async (req, res) => {
       },
     });
     resp = await resp.json();
-    res.send({ animals: resp.animals, page: resp.pagination });
+    console.log(resp, "<--------------are we getting any response back?");
+    if (resp.title === "")
+      res.send({ animals: resp.animals, page: resp.pagination });
   } catch (e) {
     console.log(`error in post location route ${e}`);
   }
 });
 
 app.post("/next", async (req, res) => {
-  const { link } = req.body;
-  console.log(`${url}${link} <==================the url with the new link`);
+  console.log(req.body, "<-------------------what is req.body here?");
+  console.log(`${url} <==================the url with the new link`);
 
   // try{
   //   let resp = await fetch(`${url}${link}`)
