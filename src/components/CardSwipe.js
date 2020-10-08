@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { ActivityIndicator, StyleSheet, View, Text } from "react-native";
+import { ActivityIndicator, StyleSheet, View, Text, Image } from "react-native";
 import { useAPI } from "../../context/apiContext";
 import { url } from "../ngrok/index";
 import Swiper from "react-native-deck-swiper";
@@ -28,6 +28,33 @@ const CardSwipe = () => {
     fetchData();
   }, []);
 
+  const showingPhotos = (card) => {
+    if (card?.photos[0].full) {
+      return (
+        <Image
+          source={{ uri: card?.photos[0]?.full }}
+          style={styles.cardImage}
+        />
+      );
+    } else if (card?.photos[1].full) {
+      return (
+        <Image
+          source={{ uri: card?.photos[1]?.full }}
+          style={styles.cardImage}
+        />
+      );
+    } else if (card?.photos[2].full) {
+      return (
+        <Image
+          source={{ uri: card?.photos[0]?.full }}
+          style={styles.cardImage}
+        />
+      );
+    } else {
+      return <Text>No Cover Photo Available</Text>;
+    }
+  };
+
   return (
     <>
       {JSON.stringify(location) === "{}" ? (
@@ -37,11 +64,21 @@ const CardSwipe = () => {
         </>
       ) : (
         <Swiper
-          cards={["DO", "MORE", "OF", "WHAT", "MAKES", "YOU", "HAPPY"]}
+          //put data.animals here vv
+          cards={data.animals}
           renderCard={(card) => {
             return (
               <View style={styles.card}>
-                <Text style={styles.text}>{card}</Text>
+                {/* {card?.photos[0]?.full ? (
+                  <>
+                    <Image
+                      source={{ uri: card?.photos[0]?.full }}
+                      style={styles.cardImage}
+                    />
+                  </>
+                ) : <Text>No Cover Photo Available</Text>
+                }  */}
+                {showingPhotos}
               </View>
             );
           }}
@@ -53,7 +90,7 @@ const CardSwipe = () => {
             console.log("onSwipedAll");
           }}
           cardIndex={0}
-          backgroundColor={"#4FD0E9"}
+          backgroundColor={"whitesmoke"}
           stackSize={4}
           stackScale={10}
           stackSeparation={14}
@@ -107,7 +144,7 @@ export default CardSwipe;
 
 const styles = StyleSheet.create({
   card: {
-    // flex: 1,
+    flex: 1,
     borderRadius: 8,
     shadowRadius: 25,
     shadowColor: "#000",
@@ -116,6 +153,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#fff",
+  },
+  cardImage: {
+    width: 160,
+    height: 100,
+    flex: 1,
+    resizeMode: "contain",
   },
 });
 

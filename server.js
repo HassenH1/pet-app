@@ -44,7 +44,6 @@ const getToken = async (url) => {
 
 app.post("/location", async (req, res) => {
   console.log(req.body, "<-----------what is the body in post request?");
-  // res.send({});
   const { lat, lon } = req.body;
 
   if (token === "") {
@@ -56,7 +55,6 @@ app.post("/location", async (req, res) => {
   }
 
   try {
-    // https://api.petfinder.com/v2/animals?location=los angeles, california
     let resp = await fetch(`${url}/animals?location=${lat}, ${lon}`, {
       method: "GET",
       headers: {
@@ -65,7 +63,6 @@ app.post("/location", async (req, res) => {
       },
     });
     resp = await resp.json();
-    console.log(resp, " <--------------------the response I am sending back");
     res.send({ animals: resp.animals, page: resp.pagination });
   } catch (e) {
     console.log(`error in post location route ${e}`);
