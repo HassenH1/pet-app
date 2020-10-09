@@ -30,10 +30,8 @@ const getToken = async (url) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        client_id: "Ww1QosUvOQysHkBG5MLgeLwPuu7jiW930DghZqjNQhQjjtFS1H",
-        client_secret: "YTQdu3zYYCVDK8V5IMpVME1wCgiWjgcli5dKQsQb",
-        // client_id: process.env.REACT_APP_CLIENT_ID,
-        // client_secret: process.env.REACT_APP_CLIENT_SECRET,
+        client_id: process.env.REACT_APP_CLIENT_ID,
+        client_secret: process.env.REACT_APP_CLIENT_SECRET,
         grant_type: "client_credentials",
       }),
     });
@@ -75,13 +73,6 @@ app.post("/location", async (req, res) => {
 
 app.post("/next", async (req, res) => {
   console.log(req.body, "<-------------------what is req.body here?");
-  console.log(`${url} <==================the url with the new link`);
-
-  // try{
-  //   let resp = await fetch(`${url}${link}`)
-  // }catch(e){
-  //   console.log(e)
-  // }
 });
 
 app.listen(PORT, () => {

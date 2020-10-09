@@ -28,42 +28,38 @@ const CardSwipe = () => {
     fetchData();
   }, []);
 
-  const showingPhotos = (card) => {
+  const ShowingPhotos = (card) => {
     //TODO : check the length of api here
-    if (!card) {
-      return (
-        <>
-          <ActivityIndicator size="large" color="#00ff00" />
-          <Text>Now Loading Images...</Text>
-        </>
-      );
-    } else {
-
-    if (card?.photos[0]?.full) {
-      console.log("inside 0");
-      return (
-        <Image
-          source={{ uri: card?.photos[0]?.full }}
-          style={styles.cardImage}
-        />
-      );
-
-    // } else if (card?.photos[1]?.full) {
-    //   console.log("inside 1");
-    //   return (
-    //     <Image
-    //       source={{ uri: card?.photos[1]?.full }}
-    //       style={styles.cardImage}
-    //     />
-    //   );
-
-    } else {
-      console.log("inside none");
-      return <Text>No Cover Photo Available</Text>;
-    }
-
-    }
-  };
+    return (
+      <>
+      {
+        !card
+          ? (
+            <>
+             <ActivityIndicator size="large" color="#00ff00" />
+             <Text>Now Loading Images...</Text>
+            </>
+          )
+          : (
+            <>
+            {
+              card?.photos
+                ? (
+                  <Image 
+                    source={{ uri: card?.photos[0].full }}
+                    style={styles.cardImage}
+                  />
+                )
+                : (
+                  <Text>No Cover Image Available</Text>
+                )
+            }
+            </>
+          )
+      }
+      </>
+    )
+  }
 
   return (
     <>
@@ -77,9 +73,11 @@ const CardSwipe = () => {
           <Swiper
             cards={data.animals}
             renderCard={(card) => {
-              return <View style={styles.card}>{showingPhotos(card)}</View>;
+              return <View style={styles.card}>{<ShowingPhotos card={card}/>}</View>;
+              // return <View style={styles.card}>{ShowingPhotos(card)}</View>;
             }}
             onSwiped={async (cardIndex) => {
+              console.log(index)
               setIndex(index + 1);
               //if cardIndex is at > 20 then load next page
               // if (index > 20) {
@@ -96,7 +94,6 @@ const CardSwipe = () => {
               //   } catch (e) {
               //     console.log(`Error trying to go to next page`);
               //   }
-
               //   dispatch({ type: "SET_LOADING", payload: false });
               // }
             }}
