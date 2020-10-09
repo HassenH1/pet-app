@@ -43,7 +43,6 @@ const getToken = async (url) => {
 };
 
 app.post("/location", async (req, res) => {
-  console.log(req.body, "<-----------what is the body in post request?");
   const { lat, lon } = req.body;
 
   if (token === "") {
