@@ -24,14 +24,16 @@ app.use(methodOverride("_method"));
 
 const getToken = async (url) => {
   try {
-    const response = await fetch(`${url}/oauth2/token`, {
+    const response = await fetch(`${url}/v2/oauth2/token`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        client_id: process.env.REACT_APP_CLIENT_ID,
-        client_secret: process.env.REACT_APP_CLIENT_SECRET,
+        client_id: "Ww1QosUvOQysHkBG5MLgeLwPuu7jiW930DghZqjNQhQjjtFS1H",
+        client_secret: "YTQdu3zYYCVDK8V5IMpVME1wCgiWjgcli5dKQsQb",
+        // client_id: process.env.REACT_APP_CLIENT_ID,
+        // client_secret: process.env.REACT_APP_CLIENT_SECRET,
         grant_type: "client_credentials",
       }),
     });
@@ -65,9 +67,7 @@ app.post("/location", async (req, res) => {
       },
     });
     resp = await resp.json();
-    console.log(resp, "<--------------are we getting any response back?");
-    if (resp.title === "")
-      res.send({ animals: resp.animals, page: resp.pagination });
+    res.send({ animals: resp.animals, page: resp.pagination });
   } catch (e) {
     console.log(`error in post location route ${e}`);
   }

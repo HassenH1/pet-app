@@ -29,25 +29,24 @@ const CardSwipe = () => {
   }, []);
 
   const showingPhotos = (card) => {
-    console.log(card, "<=----------what is card?");
     //TODO : check the length of api here
-    // if (!card) {
-    //   return (
-    //     <>
-    //       <ActivityIndicator size="large" color="#00ff00" />
-    //       <Text>Now Loading Images...</Text>
-    //     </>
-    //   );
-    // } else {
+    if (!card) {
+      return (
+        <>
+          <ActivityIndicator size="large" color="#00ff00" />
+          <Text>Now Loading Images...</Text>
+        </>
+      );
+    } else {
 
-    // if (card?.photos[0]?.full) {
-    //   console.log("inside 0");
-    //   return (
-    //     <Image
-    //       source={{ uri: card?.photos[0]?.full }}
-    //       style={styles.cardImage}
-    //     />
-    //   );
+    if (card?.photos[0]?.full) {
+      console.log("inside 0");
+      return (
+        <Image
+          source={{ uri: card?.photos[0]?.full }}
+          style={styles.cardImage}
+        />
+      );
 
     // } else if (card?.photos[1]?.full) {
     //   console.log("inside 1");
@@ -58,12 +57,12 @@ const CardSwipe = () => {
     //     />
     //   );
 
-    // } else {
-    //   console.log("inside none");
-    //   return <Text>No Cover Photo Available</Text>;
-    // }
+    } else {
+      console.log("inside none");
+      return <Text>No Cover Photo Available</Text>;
+    }
 
-    //}
+    }
   };
 
   return (
@@ -81,7 +80,6 @@ const CardSwipe = () => {
               return <View style={styles.card}>{showingPhotos(card)}</View>;
             }}
             onSwiped={async (cardIndex) => {
-              console.log(cardIndex);
               setIndex(index + 1);
               //if cardIndex is at > 20 then load next page
               // if (index > 20) {
