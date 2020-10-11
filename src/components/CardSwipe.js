@@ -24,10 +24,6 @@ const CardSwipe = () => {
     }
   };
 
-  useEffect(() => {
-    fetchData();
-  }, []);
-
   const ShowingPhotos = (card) => {
     //TODO : check the length of api here
     return (
@@ -61,6 +57,39 @@ const CardSwipe = () => {
     )
   }
 
+  const onSwiped = async (cardindex) => {
+    console.log(index)
+    setIndex(index + 1);
+    //TODO: if cardIndex is at > 20 then load next page
+
+    // if (index > 20) {
+    //   dispatch({ type: "SET_LOADING", payload: true });
+    //   try {
+    //     const resp = await fetch(`${url}/next`, {
+    //       method: "POST",
+    //       headers: {
+    //         "Content-Type": "application/json",
+    //       },
+    //       body: JSON.stringify(data.page),
+    //     });
+    //     const respJson = await resp.json();
+    //   } catch (e) {
+    //     console.log(`Error trying to go to next page`);
+    //   }
+    //   dispatch({ type: "SET_LOADING", payload: false });
+    // }
+  }
+
+  const onSwipedAll = () => {
+    return(
+      <Text>No more Pets</Text>
+    )
+  }
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   return (
     <>
       {JSON.stringify(location) === "{}" ? (
@@ -74,32 +103,9 @@ const CardSwipe = () => {
             cards={data.animals}
             renderCard={(card) => {
               return <View style={styles.card}>{<ShowingPhotos card={card}/>}</View>;
-              // return <View style={styles.card}>{ShowingPhotos(card)}</View>;
             }}
-            onSwiped={async (cardIndex) => {
-              console.log(index)
-              setIndex(index + 1);
-              //if cardIndex is at > 20 then load next page
-              // if (index > 20) {
-              //   dispatch({ type: "SET_LOADING", payload: true });
-              //   try {
-              //     const resp = await fetch(`${url}/next`, {
-              //       method: "POST",
-              //       headers: {
-              //         "Content-Type": "application/json",
-              //       },
-              //       body: JSON.stringify(data.page),
-              //     });
-              //     const respJson = await resp.json();
-              //   } catch (e) {
-              //     console.log(`Error trying to go to next page`);
-              //   }
-              //   dispatch({ type: "SET_LOADING", payload: false });
-              // }
-            }}
-            onSwipedAll={() => {
-              console.log("onSwipedAll");
-            }}
+            onSwiped={onSwiped}
+            onSwipedAll={onSwipedAll}
             cardIndex={0}
             backgroundColor={"whitesmoke"}
             stackSize={4}
@@ -156,7 +162,7 @@ export default CardSwipe;
 
 const styles = StyleSheet.create({
   card: {
-    flex: 0.75,
+    flex: 0.85,
     borderRadius: 8,
     shadowRadius: 25,
     shadowColor: "#000",
@@ -170,6 +176,6 @@ const styles = StyleSheet.create({
     width: 160,
     height: 100,
     flex: 1,
-    resizeMode: "contain",
+    resizeMode: "cover",
   },
 });
