@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { ActivityIndicator, StyleSheet, View, Text, Image } from "react-native";
+import { ActivityIndicator, StyleSheet, View, Text, Image, TouchableOpacity } from "react-native";
 import { useAPI } from "../../context/apiContext";
 import { url } from "../ngrok/index";
 import Swiper from "react-native-deck-swiper";
@@ -27,6 +27,10 @@ const CardSwipe = () => {
     }
   };
 
+  const handlePress = (card) => {
+    // navigation.navigate("<Component Here>", { ...<Pass Prop here aka card> })
+  }
+
   const ShowingPhotos = (card) => {
     //TODO : check the length of api here
     return (
@@ -45,12 +49,12 @@ const CardSwipe = () => {
               //I have to wrap image in a View tag and route to show page for each animal
               card?.photos
                 ? (
-                  // <View onPress={() => navigation.navigate(<Component>, { <Props here>})}>
-                  <Image 
-                    source={{ uri: card?.photos[0].full }}
-                    style={styles.cardImage}
-                  />
-                  // </View>
+                  <TouchableOpacity onPress={() => handlePress(card)} >
+                    <Image 
+                      source={{ uri: card?.photos[0].full }}
+                      style={styles.cardImage}
+                    />
+                  </TouchableOpacity>
                 )
                 : (
                   <Text>No Cover Image Available</Text>
