@@ -34,7 +34,6 @@ const CardSwipe = () => {
 
   const ShowingPhotos = (card) => {
     //TODO : check the length of api here
-    // console.log(card.card, "<----------------is the data coming in?")
     return (
       <>
       {
@@ -186,10 +185,20 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
   },
   cardImage: {
-    width: 160,
-    height: 100,
+    //try this first
     flex: 1,
-    resizeMode: "cover",
+    aspectRatio: 1.5, 
+    resizeMode: 'contain',
+    //try this next
+    // flex: 1,
+    // width: null,
+    // height: null,
+    // resizeMode: "contain",
+    //lastly try this
+    // width: 250,
+    // height: 100,
+    // flex: 1,
+    // resizeMode: "cover",
   },
 });
 
