@@ -29,10 +29,12 @@ const CardSwipe = () => {
 
   const handlePress = (card) => {
     // navigation.navigate("<Component Here>", { ...<Pass Prop here aka card> })
+    console.log("pressed!!")
   }
 
   const ShowingPhotos = (card) => {
     //TODO : check the length of api here
+    // console.log(card.card, "<----------------is the data coming in?")
     return (
       <>
       {
@@ -47,14 +49,14 @@ const CardSwipe = () => {
             <>
             {
               //I have to wrap image in a View tag and route to show page for each animal
-              card?.photos
+              card?.card?.photos
                 ? (
-                  <TouchableOpacity onPress={() => handlePress(card)} >
+                  // <TouchableOpacity onPress={() => handlePress(card)}>
                     <Image 
-                      source={{ uri: card?.photos[0].full }}
+                      source={{ uri: card?.card?.photos[0]?.full }}
                       style={styles.cardImage}
                     />
-                  </TouchableOpacity>
+                  // </TouchableOpacity>
                 )
                 : (
                   <Text>No Cover Image Available</Text>
@@ -83,6 +85,7 @@ const CardSwipe = () => {
     //       body: JSON.stringify(data.page),
     //     });
     //     const respJson = await resp.json();
+    //     console.log(respJson, "<------------------the response on swiped")
     //   } catch (e) {
     //     console.log(`Error trying to go to next page`);
     //   }
@@ -189,3 +192,226 @@ const styles = StyleSheet.create({
     resizeMode: "cover",
   },
 });
+
+
+// Object {
+//   "card": Object {
+//     "_links": Object {
+//       "organization": Object {
+//         "href": "/v2/organizations/ca1747",
+//       },
+//       "self": Object {
+//         "href": "/v2/animals/49420135",
+//       },
+//       "type": Object {
+//         "href": "/v2/types/dog",
+//       },
+//     },
+//     "age": "Senior",
+//     "attributes": Object {
+//       "declawed": null,
+//       "house_trained": true,
+//       "shots_current": false,
+//       "spayed_neutered": false,
+//       "special_needs": false,
+//     },
+//     "breeds": Object {
+//       "mixed": true,
+//       "primary": "Basset Hound",
+//       "secondary": "American Staffordshire Terrier",
+//       "unknown": false,
+//     },
+//     "coat": "Short",
+//     "colors": Object {
+//       "primary": "Apricot / Beige",
+//       "secondary": "Bicolor",
+//       "tertiary": null,
+//     },
+//     "contact": Object {
+//       "address": Object {
+//         "address1": null,
+//         "address2": null,
+//         "city": "Oak Hills",
+//         "country": "US",
+//         "postcode": "92344",
+//         "state": "CA",
+//       },
+//       "email": "petsforeverfound@gmail.com",
+//       "phone": "7609535800",
+//     },
+//     "description": "NAME:
+// AGE:
+
+
+// Good on a leash.
+// Great in the car.
+// Potty trained
+// Crate trained
+
+// Fixed, Vaccinated, and Micro-chipped.
+// Adoption fee:...",
+//     "distance": 72.5345,
+//     "environment": Object {
+//       "cats": false,
+//       "children": false,
+//       "dogs": false,
+//     },
+//     "gender": "Female",
+//     "id": 49420135,
+//     "name": "Zoey",
+//     "organization_animal_id": null,
+//     "organization_id": "CA1747",
+//     "photos": Array [
+//       Object {
+//         "full": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/49420135/2/?bust=1602432281",
+//         "large": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/49420135/2/?bust=1602432281&width=600",
+//         "medium": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/49420135/2/?bust=1602432281&width=300",
+//         "small": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/49420135/2/?bust=1602432281&width=100",
+//       },
+//       Object {
+//         "full": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/49420135/1/?bust=1602432279",
+//         "large": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/49420135/1/?bust=1602432279&width=600",
+//         "medium": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/49420135/1/?bust=1602432279&width=300",
+//         "small": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/49420135/1/?bust=1602432279&width=100",
+//       },
+//     ],
+//     "primary_photo_cropped": Object {
+//       "full": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/49420135/2/?bust=1602432281",
+//       "large": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/49420135/2/?bust=1602432281&width=600",
+//       "medium": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/49420135/2/?bust=1602432281&width=450",
+//       "small": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/49420135/2/?bust=1602432281&width=300",
+//     },
+//     "published_at": "2020-10-11T16:05:49+0000",
+//     "size": "Medium",
+//     "species": "Dog",
+//     "status": "adoptable",
+//     "status_changed_at": "2020-10-11T16:05:49+0000",
+//     "tags": Array [
+//       "Loving",
+//       "playful active",
+//       "some joint pain",
+//       "knows basic commmands",
+//       "loves to hunt for lizards and squirrels",
+//     ],
+//     "type": "Dog",
+//     "url": "https://www.petfinder.com/dog/zoey-49420135/ca/oak-hills/pets-forever-found-ca1747/?referrer_id=ba5a4562-5ed7-4f02-b3af-dde66347e217",
+//     "videos": Array [],
+//   },
+// } <----------------is the data coming in?
+// Object {
+//   "card": Object {
+//     "_links": Object {
+//       "organization": Object {
+//         "href": "/v2/organizations/ca710",
+//       },
+//       "self": Object {
+//         "href": "/v2/animals/49420105",
+//       },
+//       "type": Object {
+//         "href": "/v2/types/dog",
+//       },
+//     },
+//     "age": "Young",
+//     "attributes": Object {
+//       "declawed": null,
+//       "house_trained": true,
+//       "shots_current": true,
+//       "spayed_neutered": true,
+//       "special_needs": false,
+//     },
+//     "breeds": Object {
+//       "mixed": false,
+//       "primary": "Chihuahua",
+//       "secondary": null,
+//       "unknown": false,
+//     },
+//     "coat": "Short",
+//     "colors": Object {
+//       "primary": null,
+//       "secondary": null,
+//       "tertiary": null,
+//     },
+//     "contact": Object {
+//       "address": Object {
+//         "address1": null,
+//         "address2": null,
+//         "city": "Bell Gardens",
+//         "country": "US",
+//         "postcode": "90201",
+//         "state": "CA",
+//       },
+//       "email": "miracledogrescue@gmail.com",
+//       "phone": null,
+//     },
+//     "description": "CARLITOS: CHIHUAHUA//MALE/ 1 YEAR OLD/ 9 POUNDS
+
+// HOUSE TRAINED. LOVING, PLAYFUL.
+
+// Vaccinated, de-wormed and neutered
+// Come and Meet Carlitos, He...",
+//     "distance": 10.4285,
+//     "environment": Object {
+//       "cats": null,
+//       "children": true,
+//       "dogs": true,
+//     },
+//     "gender": "Male",
+//     "id": 49420105,
+//     "name": "CARLITOS",
+//     "organization_animal_id": null,
+//     "organization_id": "CA710",
+//     "photos": Array [
+//       Object {
+//         "full": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/49420105/5/?bust=1602431711",
+//         "large": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/49420105/5/?bust=1602431711&width=600",
+//         "medium": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/49420105/5/?bust=1602431711&width=300",
+//         "small": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/49420105/5/?bust=1602431711&width=100",
+//       },
+//       Object {
+//         "full": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/49420105/1/?bust=1602431696",
+//         "large": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/49420105/1/?bust=1602431696&width=600",
+//         "medium": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/49420105/1/?bust=1602431696&width=300",
+//         "small": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/49420105/1/?bust=1602431696&width=100",
+//       },
+//       Object {
+//         "full": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/49420105/2/?bust=1602431698",
+//         "large": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/49420105/2/?bust=1602431698&width=600",
+//         "medium": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/49420105/2/?bust=1602431698&width=300",
+//         "small": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/49420105/2/?bust=1602431698&width=100",
+//       },
+//       Object {
+//         "full": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/49420105/3/?bust=1602431708",
+//         "large": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/49420105/3/?bust=1602431708&width=600",
+//         "medium": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/49420105/3/?bust=1602431708&width=300",
+//         "small": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/49420105/3/?bust=1602431708&width=100",
+//       },
+//       Object {
+//         "full": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/49420105/4/?bust=1602431709",
+//         "large": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/49420105/4/?bust=1602431709&width=600",
+//         "medium": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/49420105/4/?bust=1602431709&width=300",
+//         "small": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/49420105/4/?bust=1602431709&width=100",
+//       },
+//       Object {
+//         "full": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/49420105/6/?bust=1602431732",
+//         "large": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/49420105/6/?bust=1602431732&width=600",
+//         "medium": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/49420105/6/?bust=1602431732&width=300",
+//         "small": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/49420105/6/?bust=1602431732&width=100",
+//       },
+//     ],
+//     "primary_photo_cropped": Object {
+//       "full": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/49420105/5/?bust=1602431711",
+//       "large": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/49420105/5/?bust=1602431711&width=600",
+//       "medium": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/49420105/5/?bust=1602431711&width=450",
+//       "small": "https://dl5zpyw5k3jeb.cloudfront.net/photos/pets/49420105/5/?bust=1602431711&width=300",
+//     },
+//     "published_at": "2020-10-11T15:59:12+0000",
+//     "size": "Small",
+//     "species": "Dog",
+//     "status": "adoptable",
+//     "status_changed_at": "2020-10-11T15:59:12+0000",
+//     "tags": Array [],
+//     "type": "Dog",
+//     "url": "https://www.petfinder.com/dog/carlitos-49420105/ca/bell-gardens/miracle-dog-rescue-ca710/?referrer_id=ba5a4562-5ed7-4f02-b3af-dde66347e217",
+//     "videos": Array [],
+//   },
+// } <----------------is the data coming in?
