@@ -3,11 +3,14 @@ import { ActivityIndicator, StyleSheet, View, Text, Image } from "react-native";
 import { useAPI } from "../../context/apiContext";
 import { url } from "../ngrok/index";
 import Swiper from "react-native-deck-swiper";
+import { useNavigation } from "@react-navigation/native";
+
 
 const CardSwipe = () => {
   const { userState, dispatch } = useAPI();
   const { user, loading, data, location } = userState;
   const [index, setIndex] = useState(0);
+  const navigation = useNavigation();
 
   const fetchData = async () => {
     try {
@@ -39,12 +42,15 @@ const CardSwipe = () => {
           : (
             <>
             {
+              //I have to wrap image in a View tag and route to show page for each animal
               card?.photos
                 ? (
+                  // <View onPress={() => navigation.navigate(<Component>, { <Props here>})}>
                   <Image 
                     source={{ uri: card?.photos[0].full }}
                     style={styles.cardImage}
                   />
+                  // </View>
                 )
                 : (
                   <Text>No Cover Image Available</Text>
