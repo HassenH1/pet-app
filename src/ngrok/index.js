@@ -1,1 +1,1 @@
-export const url = "http://6566a87fe8d7.ngrok.io"; //gotta update this before making any fetch calls
+export const url = "http://3ad73649b0e2.ngrok.io"; //gotta update this before making any fetch calls
