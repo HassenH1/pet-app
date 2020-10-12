@@ -47,7 +47,6 @@ const CardSwipe = () => {
           : (
             <>
             {
-              //I have to wrap image in a View tag and route to show page for each animal
               card?.card?.photos
                 ? (
                   // <TouchableOpacity onPress={() => handlePress(card)}>
@@ -74,7 +73,6 @@ const CardSwipe = () => {
     //TODO: if cardIndex is at > 20 then load next page
 
     // if (index > 20) {
-    //   dispatch({ type: "SET_LOADING", payload: true });
     //   try {
     //     const resp = await fetch(`${url}/next`, {
     //       method: "POST",
@@ -85,10 +83,10 @@ const CardSwipe = () => {
     //     });
     //     const respJson = await resp.json();
     //     console.log(respJson, "<------------------the response on swiped")
+    //     dispatch({ type: "FETCH_DATA", payload: respJson }) //setting data here
     //   } catch (e) {
     //     console.log(`Error trying to go to next page`);
     //   }
-    //   dispatch({ type: "SET_LOADING", payload: false });
     // }
   }
 
