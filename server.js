@@ -64,7 +64,22 @@ app.post("/location", async (req, res) => {
 });
 
 app.post("/next", async (req, res) => {
-  console.log(req.body, "<-------------------what is req.body here?");
+  const { _links } = req.body
+
+  try {
+    let resp = await fetch(`${url}${_links.next.href}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token.access_token}`,
+      },
+    });
+    resp = await resp.json();
+    console.log(resp, "<----------the response im gonna send")
+    res.send({ animals: resp.animals, page: resp.pagination });
+  } catch (e) {
+    throw new Error("could not send response back inside post location")
+  }
 });
 
 app.listen(PORT, () => {

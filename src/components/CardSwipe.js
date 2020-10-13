@@ -71,23 +71,23 @@ const CardSwipe = () => {
     console.log(index)
     setIndex(index + 1);
     //TODO: if cardIndex is at > 20 then load next page
-
-    // if (index > 20) {
-    //   try {
-    //     const resp = await fetch(`${url}/next`, {
-    //       method: "POST",
-    //       headers: {
-    //         "Content-Type": "application/json",
-    //       },
-    //       body: JSON.stringify(data.page),
-    //     });
-    //     const respJson = await resp.json();
-    //     console.log(respJson, "<------------------the response on swiped")
-    //     dispatch({ type: "FETCH_DATA", payload: respJson }) //setting data here
-    //   } catch (e) {
-    //     console.log(`Error trying to go to next page`);
-    //   }
-    // }
+    if (index >= 19) {
+      try {
+        const resp = await fetch(`${url}/next`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data.page),
+        });
+        const respJson = await resp.json();
+        console.log(respJson, "<------------------the response on swiped")
+        await dispatch({ type: "FETCH_DATA", payload: respJson }) //setting data here
+        // fetchData()
+      } catch (e) {
+        console.log(`Error trying to go to next page`);
+      }
+    }
   }
 
   const onSwipedAll = () => {
@@ -98,6 +98,7 @@ const CardSwipe = () => {
 
   useEffect(() => {
     fetchData();
+    console.log("how many times does this mount?")
   }, []);
 
   return (
