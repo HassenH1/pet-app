@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { ActivityIndicator, StyleSheet, View, Text, Image } from "react-native";
+import { ActivityIndicator, StyleSheet, View, Text, Image, TouchableOpacity } from "react-native";
 import { useAPI } from "../../context/apiContext";
 import { url } from "../ngrok/index";
 import Swiper from "react-native-deck-swiper";
+import { useNavigation } from "@react-navigation/native";
+
 
 const CardSwipe = () => {
   const { userState, dispatch } = useAPI();
   const { user, loading, data, location } = userState;
   const [index, setIndex] = useState(0);
+  const navigation = useNavigation();
 
   const fetchData = async () => {
     try {
@@ -24,52 +27,81 @@ const CardSwipe = () => {
     }
   };
 
+  const handlePress = (card) => {
+    // navigation.navigate("<Component Here>", { ...<Pass Prop here aka card> })
+    console.log("pressed!!")
+  }
+
+  const ShowingPhotos = (card) => {
+    //TODO : check the length of api here
+    return (
+      <>
+      {
+        !card
+          ? (
+            <>
+             <ActivityIndicator size="large" color="#00ff00" />
+             <Text>Now Loading Images...</Text>
+            </>
+          )
+          : (
+            <>
+            {
+              card?.card?.photos
+                ? (
+                  // <TouchableOpacity onPress={() => handlePress(card)}>
+                    <Image 
+                      source={{ uri: card?.card?.photos[0]?.full }}
+                      style={styles.cardImage}
+                    />
+                  // </TouchableOpacity>
+                )
+                : (
+                  <Text>No Cover Image Available</Text>
+                )
+            }
+            </>
+          )
+      }
+      </>
+    )
+  }
+
+  const onSwiped = async (cardindex) => {
+    console.log(index)
+    setIndex(index + 1);
+    //TODO: if cardIndex is at > 20 then load next page
+    // gotta fix this later
+    
+    // if (index >= 19) {
+    //   try {
+    //     const resp = await fetch(`${url}/next`, {
+    //       method: "POST",
+    //       headers: {
+    //         "Content-Type": "application/json",
+    //       },
+    //       body: JSON.stringify(data.page),
+    //     });
+    //     const respJson = await resp.json();
+    //     console.log(respJson, "<------------------the response on swiped")
+    //     await dispatch({ type: "FETCH_DATA", payload: respJson }) //setting data here
+    //     // fetchData()
+    //   } catch (e) {
+    //     console.log(`Error trying to go to next page`);
+    //   }
+    // }
+  }
+
+  const onSwipedAll = () => {
+    return(
+      <Text>No more Pets</Text>
+    )
+  }
+
   useEffect(() => {
     fetchData();
+    console.log("how many times does this mount?")
   }, []);
-
-  const showingPhotos = (card) => {
-    //TODO : check the length of api here
-    //while (card.length <= 20) {
-    if (!card) {
-      return (
-        <>
-          <ActivityIndicator size="large" color="#00ff00" />
-          <Text>Now Loading Images...</Text>
-        </>
-      );
-    } else {
-      if (card?.photos[0]?.full) {
-        console.log("inside 0");
-        return (
-          <Image
-            source={{ uri: card?.photos[0]?.full }}
-            style={styles.cardImage}
-          />
-        );
-      } else if (card?.photos[1]?.full) {
-        console.log("inside 1");
-        return (
-          <Image
-            source={{ uri: card?.photos[1]?.full }}
-            style={styles.cardImage}
-          />
-        );
-        // } else if (card?.photos[2]?.full) {
-        //   console.log("inside 2");
-        //   return (
-        //     <Image
-        //       source={{ uri: card?.photos[2]?.full }}
-        //       style={styles.cardImage}
-        //     />
-        //   );
-      } else {
-        console.log("inside none");
-        return <Text>No Cover Photo Available</Text>;
-      }
-    }
-    //}
-  };
 
   return (
     <>
@@ -83,37 +115,15 @@ const CardSwipe = () => {
           <Swiper
             cards={data.animals}
             renderCard={(card) => {
-              return <View style={styles.card}>{showingPhotos(card)}</View>;
+              return <View style={styles.card}>{<ShowingPhotos card={card}/>}</View>;
             }}
-            onSwiped={async (cardIndex) => {
-              console.log(cardIndex);
-              setIndex(index + 1);
-              //if cardIndex is at > 20 then load next page
-              if (index > 20) {
-                dispatch({ type: "SET_LOADING", payload: true });
-                try {
-                  const resp = await fetch(`${url}/next`, {
-                    method: "POST",
-                    headers: {
-                      "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify(data.page),
-                  });
-                } catch (e) {
-                  console.log(`Error trying to go to next page`);
-                }
-
-                dispatch({ type: "SET_LOADING", payload: false });
-              }
-            }}
-            onSwipedAll={() => {
-              console.log("onSwipedAll");
-            }}
+            onSwiped={onSwiped}
+            onSwipedAll={onSwipedAll}
             cardIndex={0}
             backgroundColor={"whitesmoke"}
             stackSize={4}
             stackScale={10}
-            stackSeparation={14}
+            // stackSeparation={14}
             disableBottomSwipe
             disableTopSwipe
             animateOverlayLabelsOpacity
@@ -165,7 +175,7 @@ export default CardSwipe;
 
 const styles = StyleSheet.create({
   card: {
-    flex: 0.75,
+    flex: 0.85,
     borderRadius: 8,
     shadowRadius: 25,
     shadowColor: "#000",
@@ -176,9 +186,29 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
   },
   cardImage: {
-    width: 160,
-    height: 100,
+    //try this first
+    // flex: 1,
+    // aspectRatio: 1.0, 
+    // resizeMode: 'contain',
+    //try this next
+    // flex: 1,
+    // width: null,
+    // height: null,
+    // resizeMode: "contain",
+    //try this next ------------
+    // flex: 1,
+    // width: '100%',
+    // height: '100%',
+    // resizeMode: 'contain',
+    //lastly try this
+    // width: 250,
+    // height: 100,
+    // flex: 1,
+    // resizeMode: "cover",
+    width: 345,
+    height: "95%",
     flex: 1,
-    resizeMode: "contain",
+    borderRadius: 8,
+    resizeMode: "cover",
   },
 });

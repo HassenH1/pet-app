@@ -12,19 +12,11 @@ let token = "";
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors());
-// app.use(express.json());
 app.use(methodOverride("_method"));
-
-//testing post route
-// app.post("/", (req, res) => {
-//   console.log("test post method");
-//   console.log(req.body);
-//   res.send(`Hello world ${req.body}`);
-// });
 
 const getToken = async (url) => {
   try {
-    const response = await fetch(`${url}/oauth2/token`, {
+    const response = await fetch(`${url}/v2/oauth2/token`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -38,19 +30,21 @@ const getToken = async (url) => {
     const json = await response.json();
     token = json; //assigned token here
   } catch (error) {
-    console.log(error, "<--------------error in getToken method");
+    throw new Error("cannot assign token to json")
   }
 };
 
 app.post("/location", async (req, res) => {
-  console.log(req.body, "<-----------what is the body in post request?");
   const { lat, lon } = req.body;
 
   if (token === "") {
     try {
       await getToken(url);
+      if (token.message === "Forbidden") {
+        throw new Error("token.message is forbidden inside location api") 
+      }
     } catch (e) {
-      console.log(e, " <-----------error inside get method fetching for token");
+      throw new Error("could not get new token")
     }
   }
 
@@ -65,19 +59,27 @@ app.post("/location", async (req, res) => {
     resp = await resp.json();
     res.send({ animals: resp.animals, page: resp.pagination });
   } catch (e) {
-    console.log(`error in post location route ${e}`);
+    throw new Error("could not send response back inside post location")
   }
 });
 
 app.post("/next", async (req, res) => {
-  const { link } = req.body;
-  console.log(`${url}${link} <==================the url with the new link`);
+  const { _links } = req.body
 
-  // try{
-  //   let resp = await fetch(`${url}${link}`)
-  // }catch(e){
-  //   console.log(e)
-  // }
+  try {
+    let resp = await fetch(`${url}${_links.next.href}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token.access_token}`,
+      },
+    });
+    resp = await resp.json();
+    console.log(resp, "<----------the response im gonna send")
+    res.send({ animals: resp.animals, page: resp.pagination });
+  } catch (e) {
+    throw new Error("could not send response back inside post location")
+  }
 });
 
 app.listen(PORT, () => {
